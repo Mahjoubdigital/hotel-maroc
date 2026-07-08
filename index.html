@@ -22,7 +22,6 @@ body {
 }
 body[lang="zh"] { font-family: 'Noto Sans SC', 'Poppins', sans-serif; }
 body[lang="ar"] { font-family: 'Noto Sans Arabic', 'Poppins', sans-serif; }
-
 body[dir="rtl"] { direction: rtl; text-align: right; }
 body[dir="rtl"] nav ul { flex-direction: row-reverse; }
 body[dir="rtl"] .service-card::before { transform-origin: right; }
@@ -59,7 +58,6 @@ header {
 }
 .logo i { font-size: 2rem; }
 .logo-sub { color: var(--white); font-weight: 300; font-size: 0.9rem; display: block; }
-
 .nav-wrapper { display: flex; align-items: center; gap: 1.5rem; }
 nav ul { display: flex; list-style: none; gap: 2rem; }
 nav a {
@@ -72,7 +70,6 @@ nav a::after {
 }
 nav a:hover { color: var(--gold); }
 nav a:hover::after { width: 100%; }
-
 .lang-dropdown { position: relative; display: inline-block; }
 .lang-dropdown-btn {
   background: rgba(201, 169, 97, 0.2); border: 1px solid var(--gold);
@@ -103,7 +100,6 @@ nav a:hover::after { width: 100%; }
 .lang-option .lang-name { flex: 1; }
 .lang-option .check { color: var(--gold); opacity: 0; }
 .lang-option.active .check { opacity: 1; }
-
 .menu-toggle { display: none; background: none; border: none; color: var(--gold); font-size: 1.5rem; cursor: pointer; }
 
 .hero {
@@ -826,6 +822,9 @@ footer { background: #1a0f08; color: var(--white); padding: 4rem 5% 2rem; }
 </div>
 
 <script>
+/* ========================================
+   IDIOMAS
+   ======================================== */
 const languages = [
   { code: 'es', name: 'Español', flag: '🇪🇸' },
   { code: 'fr', name: 'Français', flag: '🇫🇷' },
@@ -846,201 +845,205 @@ function detectLanguage() {
   return supported.includes(browserLang) ? browserLang : (map[browserLang] || 'es');
 }
 
-// webTranslations se mantiene igual al archivo anterior (por brevedad, mantengo la referencia completa en el código)
-// Aquí incluyo las traducciones completas en los 10 idiomas como antes
+/* ========================================
+   TRADUCCIONES WEB - BASE (ES)
+   ======================================== */
+const webTranslationsBase = {
+  page_title: "Marruecos Premium - Hoteles y Turismo",
+  page_description: "Tu agencia de confianza para descubrir la magia de Marruecos",
+  logo_main: "Marruecos", logo_sub: "Premium",
+  nav_home: "Inicio", nav_hotels: "Hoteles", nav_tours: "Tours",
+  nav_transport: "Transporte", nav_packages: "Paquetes", nav_contact: "Contacto",
+  hero_title_1: "Descubre la", hero_title_2: "Magia", hero_title_3: "de Marruecos",
+  hero_subtitle: "Vive una experiencia única entre desiertos dorados, medinas milenarias y la hospitalidad bereber",
+  hero_cta: "Reserva ahora", hero_cta2: "Ver destinos",
+  services_title_1: "Nuestros", services_title_2: "Servicios",
+  services_subtitle: "Todo lo que necesitas para una experiencia inolvidable en Marruecos",
+  service_hotel_title: "Alojamiento",
+  service_hotel_desc: "Hoteles de lujo, Riads tradicionales con encanto y apartamentos con vistas espectaculares",
+  service_tours_title: "Tours y Excursiones",
+  service_tours_desc: "Descubre el desierto, las ciudades imperiales y las montañas del Atlas con guías expertos",
+  service_transport_title: "Transporte y Traslados",
+  service_transport_desc: "Servicio privado con conductor, traslados al aeropuerto y alquiler de vehículos",
+  service_packages_title: "Paquetes Completos",
+  service_packages_desc: "Viajes todo incluido diseñados a tu medida con la mejor relación calidad-precio",
+  more_info: "Más información",
+  dest_title_1: "Destinos", dest_title_2: "Destacados",
+  dest_subtitle: "Lugares mágicos que te dejarán sin aliento",
+  tag_popular: "Popular", tag_magic: "Mágico", tag_adventure: "Aventura",
+  dest_marrakech: "Marrakech", dest_marrakech_desc: "La ciudad roja y sus souks mágicos",
+  dest_fez: "Fez", dest_fez_desc: "La capital espiritual y cultural",
+  dest_tangier: "Tánger", dest_tangier_desc: "La puerta de África y Europa",
+  dest_chefchaouen: "Chefchaouen", dest_chefchaouen_desc: "La perla azul del Rif",
+  dest_agadir: "Agadir", dest_agadir_desc: "Playas doradas y sol todo el año",
+  dest_merzouga: "Desierto de Merzouga", dest_merzouga_desc: "Dunas doradas y noches bajo las estrellas",
+  dest_atlas: "Montañas Atlas", dest_atlas_desc: "Paisajes impresionantes y pueblos bereberes",
+  dest_essaouira: "Essaouira", dest_essaouira_desc: "La ciudad de los vientos y el arte",
+  why_title_1: "¿Por qué", why_title_2: "elegirnos",
+  why_subtitle: "Más de 15 años creando experiencias inolvidables en Marruecos",
+  why_local_title: "Experiencia Local", why_local_desc: "Somos marroquíes. Conocemos cada rincón, cada tradición y cada secreto del país",
+  why_price_title: "Precios Competitivos", why_price_desc: "Las mejores tarifas sin intermediarios. Trato directo con hoteles y servicios locales",
+  why_247_title: "Atención 24/7", why_247_desc: "Estamos disponibles las 24 horas, los 7 días de la semana para asistirte",
+  why_guides_title: "Guías Certificados", why_guides_desc: "Guías profesionales multilingües con años de experiencia y pasión por compartir",
+  test_title_1: "Lo que dicen nuestros", test_title_2: "clientes",
+  test_subtitle: "Miles de viajeros han confiado en nosotros",
+  test_1_text: "\"Una experiencia increíble. El riad era espectacular y el tour por el desierto fue mágico.\"",
+  test_1_info: "España - Octubre 2025",
+  test_2_text: "\"Service exceptionnel! Organisation parfaite du début à la fin.\"",
+  test_2_info: "Francia - Marzo 2026",
+  test_3_text: "\"Amazing trip through Morocco! Will definitely come back!\"",
+  test_3_info: "Reino Unido - Mayo 2026",
+  contact_title_1: "Contáctanos", contact_title_2: "ahora",
+  contact_subtitle: "Estamos aquí para ayudarte a planificar tu viaje soñado",
+  contact_whatsapp: "WhatsApp", contact_email: "Email", contact_office: "Oficina",
+  contact_office_city: "Marrakech, Marruecos",
+  footer_about: "Tu agencia de confianza para descubrir la magia de Marruecos con experiencias auténticas y memorables.",
+  footer_quick: "Enlaces Rápidos", footer_destinations: "Destinos", footer_legal_title: "Legal",
+  footer_privacy: "Política de Privacidad", footer_terms: "Términos y Condiciones",
+  footer_cookies: "Política de Cookies", footer_notice: "Aviso Legal",
+  footer_copy: "© 2026 Marruecos Premium. Todos los derechos reservados.",
+  chat_tooltip: "💬 ¿Necesitas ayuda? Habla con nosotros",
+  book_now: "Reservar ahora", plan_visit: "Planificar visita",
+  service_accom_title: "Alojamiento de Lujo y Tradición",
+  service_accom_intro: "Ofrecemos una selección cuidadosa de los mejores alojamientos en Marruecos, combinando lujo, tradición y comodidad.",
+  service_accom_hotels: "Hoteles de Lujo", service_accom_hotels_desc: "Hoteles 5 estrellas con spas, piscinas y vistas panorámicas. Servicio impecable.",
+  service_accom_riads: "Riads Tradicionales", service_accom_riads_desc: "Casas marroquíes con patio interior, decoradas con artesanía local y encanto único.",
+  service_accom_apart: "Apartamentos", service_accom_apart_desc: "Totalmente equipados con cocina, perfectos para familias o estancias largas.",
+  service_accom_camp: "Campamentos Desierto", service_accom_camp_desc: "Jaimas de lujo en las dunas. Noches bajo las estrellas con cena bereber.",
+  service_accom_features: "Características",
+  service_accom_feat1: "WiFi gratuito", service_accom_feat2: "Desayuno incluido",
+  service_accom_feat3: "Aire acondicionado", service_accom_feat4: "Vistas espectaculares",
+  service_accom_feat5: "Atención 24/7", service_accom_feat6: "Traslados disponibles",
+  service_tours_title: "Tours y Excursiones Guiadas",
+  service_tours_intro: "Tours diseñados para mostrarte lo mejor de Marruecos con guías certificados.",
+  service_tours_desert: "Tours al Desierto", service_tours_desert_desc: "Excursiones de 2 a 4 días a Merzouga o Zagora. Paseos en camello y noches en campamento.",
+  service_tours_imperial: "Ciudades Imperiales", service_tours_imperial_desc: "Recorre Fez, Marrakech, Meknes y Rabat. Historia, arquitectura y cultura.",
+  service_tours_atlas: "Montañas del Atlas", service_tours_atlas_desc: "Trekking, pueblos bereberes, cascadas de Ouzoud y el pico Toubkal (4,167m).",
+  service_tours_medina: "Tours Urbanos", service_tours_medina_desc: "Visitas a medinas, souks y monumentos. Descubre los tesoros de cada ciudad.",
+  service_tours_features: "Incluye",
+  service_tours_feat1: "Guía certificado", service_tours_feat2: "Transporte privado",
+  service_tours_feat3: "Alojamiento según tour", service_tours_feat4: "Comidas tradicionales",
+  service_tours_feat5: "Entradas monumentos", service_tours_feat6: "Seguro de viaje",
+  service_transport_title: "Transporte Privado y Traslados",
+  service_transport_intro: "Transporte privado con conductores profesionales y vehículos modernos.",
+  service_transport_airport: "Traslados Aeropuerto", service_transport_airport_desc: "Recogida en todos los aeropuertos. Monitoreo de vuelos y espera sin cargo.",
+  service_transport_intercity: "Entre Ciudades", service_transport_intercity_desc: "Traslados privados con rutas personalizadas y paradas turísticas.",
+  service_transport_driver: "Coche con Conductor", service_transport_driver_desc: "Vehículo con conductor por horas, días o semanas. Flexibilidad total.",
+  service_transport_rental: "Alquiler Vehículos", service_transport_rental_desc: "Flota moderna de coches, SUVs y 4x4. Seguro completo y kilometraje ilimitado.",
+  service_transport_features: "Ventajas",
+  service_transport_feat1: "Conductores profesionales", service_transport_feat2: "Vehículos con AC",
+  service_transport_feat3: "WiFi a bordo", service_transport_feat4: "Agua disponible",
+  service_transport_feat5: "Seguro incluido", service_transport_feat6: "Disponibilidad 24/7",
+  service_packages_title: "Paquetes Turísticos Completos",
+  service_packages_intro: "Paquetes a medida con todo incluido para disfrutar sin preocupaciones.",
+  service_packages_short: "Escapadas Cortas (3-5 días)", service_packages_short_desc: "Perfectas para fin de semana largo. Marrakech y alrededores o desierto.",
+  service_packages_week: "Una Semana (7 días)", service_packages_week_desc: "Circuito clásico: Marrakech - Desierto - Fez - Chefchaouen.",
+  service_packages_grand: "Gran Tour (10-15 días)", service_packages_grand_desc: "Recorrido completo: ciudades imperiales, desierto, montañas y costa.",
+  service_packages_custom: "Paquetes Personalizados", service_packages_custom_desc: "Diseñamos tu viaje a medida según tus intereses y presupuesto.",
+  service_packages_features: "Incluye",
+  service_packages_feat1: "Alojamiento seleccionado", service_packages_feat2: "Desayunos diarios",
+  service_packages_feat3: "Transporte privado", service_packages_feat4: "Guías locales",
+  service_packages_feat5: "Actividades incluidas", service_packages_feat6: "Asistencia 24/7",
+  dest_marrakech_title: "Marrakech - La Ciudad Roja",
+  dest_marrakech_intro: "Marrakech es el corazón palpitante de Marruecos. Conocida como la 'Ciudad Roja', es donde la tradición y la modernidad se encuentran.",
+  dest_marrakech_highlights: "Puntos de Interés",
+  dest_marrakech_h1: "Plaza Jemaa el-Fnaa", dest_marrakech_h1_desc: "Patrimonio UNESCO. De día mercado, de noche festival de comida y música.",
+  dest_marrakech_h2: "Jardín Majorelle", dest_marrakech_h2_desc: "Jardín botánico con característico azul cobalto, antigua propiedad de Yves Saint Laurent.",
+  dest_marrakech_h3: "Medina y Souks", dest_marrakech_h3_desc: "Laberinto de callejuelas con artesanía, especias, textiles y joyas.",
+  dest_marrakech_h4: "Palacio Bahía", dest_marrakech_h4_desc: "Palacio del siglo XIX con jardines y salas decoradas con zellige.",
+  dest_marrakech_best_time: "Mejor época", dest_marrakech_best_time_desc: "Primavera (marzo-mayo) y otoño (septiembre-noviembre).",
+  dest_marrakech_activities: "Actividades principales",
+  dest_marrakech_act1: "Visitar la Koutoubia", dest_marrakech_act2: "Hammam tradicional",
+  dest_marrakech_act3: "Cocina marroquí", dest_marrakech_act4: "Excursión al desierto",
+  dest_fez_title: "Fez - Capital Cultural",
+  dest_fez_intro: "Fez es la capital espiritual y cultural de Marruecos, fundada en el año 789. Su medina es un museo vivo.",
+  dest_fez_highlights: "Puntos de Interés",
+  dest_fez_h1: "Medina de Fez el-Bali", dest_fez_h1_desc: "Patrimonio UNESCO. 9,000 callejuelas sin coches con curtidurías y mezquitas.",
+  dest_fez_h2: "Curtidurías Chouara", dest_fez_h2_desc: "Las famosas tenerías donde se trabaja el cuero como hace mil años.",
+  dest_fez_h3: "Universidad Al Quaraouiyine", dest_fez_h3_desc: "Fundada en 859, la universidad más antigua del mundo aún en funcionamiento.",
+  dest_fez_h4: "Palacio Real", dest_fez_h4_desc: "Residencia del rey con impresionantes puertas de bronce dorado.",
+  dest_fez_best_time: "Mejor época", dest_fez_best_time_desc: "Primavera y otoño son ideales.",
+  dest_fez_activities: "Actividades principales",
+  dest_fez_act1: "Tour guiado medina", dest_fez_act2: "Taller de artesanía",
+  dest_fez_act3: "Cocina tradicional", dest_fez_act4: "Visita a Meknes",
+  dest_tangier_title: "Tánger - La Puerta de África",
+  dest_tangier_intro: "Tánger es donde Europa y África se encuentran. Punto de encuentro de culturas, escritores y artistas durante siglos.",
+  dest_tangier_highlights: "Puntos de Interés",
+  dest_tangier_h1: "Cueva de Hércules", dest_tangier_h1_desc: "Formación natural con vistas al Atlántico. Según la leyenda, aquí descansó Hércules.",
+  dest_tangier_h2: "Medina y Kasbah", dest_tangier_h2_desc: "Centro histórico con calles empinadas y vistas al estrecho de Gibraltar.",
+  dest_tangier_h3: "Cabo Spartel", dest_tangier_h3_desc: "Donde el Atlántico se encuentra con el Mediterráneo. Faro histórico.",
+  dest_tangier_h4: "Gran Socco", dest_tangier_h4_desc: "Plaza principal que conecta la ciudad moderna con la medina.",
+  dest_tangier_best_time: "Mejor época", dest_tangier_best_time_desc: "De abril a octubre. Clima suave todo el año.",
+  dest_tangier_activities: "Actividades principales",
+  dest_tangier_act1: "Paseo por la cornisa", dest_tangier_act2: "Visita a Asilah",
+  dest_tangier_act3: "Excursión a Tetuán", dest_tangier_act4: "Cafés históricos",
+  dest_chefchaouen_title: "Chefchaouen - La Perla Azul",
+  dest_chefchaouen_intro: "Chefchaouen es famosa por sus calles pintadas de azul. Situada en las montañas del Rif, es un remanso de paz.",
+  dest_chefchaouen_highlights: "Puntos de Interés",
+  dest_chefchaouen_h1: "Medina Azul", dest_chefchaouen_h1_desc: "Callejuelas empedradas pintadas de azul. Perfecto para fotografías.",
+  dest_chefchaouen_h2: "Plaza Uta el-Hammam", dest_chefchaouen_h2_desc: "Plaza principal rodeada de cafés. Ideal para tomar té a la menta.",
+  dest_chefchaouen_h3: "Kasbah", dest_chefchaouen_h3_desc: "Fortaleza del siglo XV con jardín andalusí y museo etnográfico.",
+  dest_chefchaouen_h4: "Cascadas de Akchour", dest_chefchaouen_h4_desc: "A 30 minutos, senderismo entre montañas y piscinas naturales.",
+  dest_chefchaouen_best_time: "Mejor época", dest_chefchaouen_best_time_desc: "Primavera y otoño. Verano caluroso pero noches frescas.",
+  dest_chefchaouen_activities: "Actividades principales",
+  dest_chefchaouen_act1: "Fotografía urbana", dest_chefchaouen_act2: "Senderismo Akchour",
+  dest_chefchaouen_act3: "Compras artesanía", dest_chefchaouen_act4: "Excursión a Tetuán",
+  dest_agadir_title: "Agadir - Sol y Playa",
+  dest_agadir_intro: "Agadir es el principal destino de playa de Marruecos, con más de 300 días de sol al año.",
+  dest_agadir_highlights: "Puntos de Interés",
+  dest_agadir_h1: "Playa de Agadir", dest_agadir_h1_desc: "10 km de playa de arena fina con paseo marítimo. Ideal para deportes acuáticos.",
+  dest_agadir_h2: "Kasbah de Agadir", dest_agadir_h2_desc: "Fortaleza en la colina con vistas panorámicas de la bahía.",
+  dest_agadir_h3: "Souk El Had", dest_agadir_h3_desc: "El mercado más grande de Marruecos con más de 6,000 puestos.",
+  dest_agadir_h4: "Valle de los Pájaros", dest_agadir_h4_desc: "Parque zoológico en el centro. Perfecto para familias.",
+  dest_agadir_best_time: "Mejor época", dest_agadir_best_time_desc: "Todo el año. Inviernos suaves (20-25°C) y veranos cálidos.",
+  dest_agadir_activities: "Actividades principales",
+  dest_agadir_act1: "Deportes acuáticos", dest_agadir_act2: "Golf",
+  dest_agadir_act3: "Excursión a Taroudant", dest_agadir_act4: "Vida nocturna",
+  dest_merzouga_title: "Desierto de Merzouga - Dunas Doradas",
+  dest_merzouga_intro: "Merzouga es la puerta al erg Chebbi, un mar de dunas doradas de hasta 150 metros de altura.",
+  dest_merzouga_highlights: "Puntos de Interés",
+  dest_merzouga_h1: "Dunas de Erg Chebbi", dest_merzouga_h1_desc: "Dunas cambiantes de color. Paseos en camello al atardecer.",
+  dest_merzouga_h2: "Campamentos Desierto", dest_merzouga_h2_desc: "Jaimas de lujo. Cena tradicional, música bereber y noches bajo las estrellas.",
+  dest_merzouga_h3: "Ksar de Merzouga", dest_merzouga_h3_desc: "Antiguo granero fortificado. Museo local y vistas al oasis.",
+  dest_merzouga_h4: "Lago Dayet Srji", dest_merzouga_h4_desc: "Lago estacional que atrae flamencos rosas en primavera.",
+  dest_merzouga_best_time: "Mejor época", dest_merzouga_best_time_desc: "Octubre a abril. Evita el verano (supera 45°C).",
+  dest_merzouga_activities: "Actividades principales",
+  dest_merzouga_act1: "Paseo en camello", dest_merzouga_act2: "Sandboarding",
+  dest_merzouga_act3: "Música gnawa", dest_merzouga_act4: "Visita a Rissani",
+  dest_atlas_title: "Montañas del Atlas - Naturaleza Pura",
+  dest_atlas_intro: "La cordillera del Atlas atraviesa Marruecos, ofreciendo paisajes espectaculares y pueblos bereberes.",
+  dest_atlas_highlights: "Puntos de Interés",
+  dest_atlas_h1: "Monte Toubkal", dest_atlas_h1_desc: "4,167m, el pico más alto del Norte de África. Trekking de 2-3 días.",
+  dest_atlas_h2: "Valle de Ourika", dest_atlas_h2_desc: "Valle verde con cascadas y pueblos bereberes. A 30 km de Marrakech.",
+  dest_atlas_h3: "Cascadas de Ouzoud", dest_atlas_h3_desc: "Las cascadas más altas de Marruecos (110m). Monos berberiscos.",
+  dest_atlas_h4: "Valle del Dades", dest_atlas_h4_desc: "Desfiladeros espectaculares, kasbahs y palmerales.",
+  dest_atlas_best_time: "Mejor época", dest_atlas_best_time_desc: "Primavera y otoño para trekking. Invierno para esquiar.",
+  dest_atlas_activities: "Actividades principales",
+  dest_atlas_act1: "Trekking", dest_atlas_act2: "Alpinismo",
+  dest_atlas_act3: "Visita pueblos bereberes", dest_atlas_act4: "Esquí (invierno)",
+  dest_essaouira_title: "Essaouira - Ciudad de los Vientos",
+  dest_essaouira_intro: "Essaouira es una ciudad costera amurallada, paraíso de surfistas y kitesurfistas.",
+  dest_essaouira_highlights: "Puntos de Interés",
+  dest_essaouira_h1: "Medina Amurallada", dest_essaouira_h1_desc: "Patrimonio UNESCO. Galerías de arte, talleres de madera y ambiente bohemio.",
+  dest_essaouira_h2: "Puerto Pesquero", dest_essaouira_h2_desc: "Colorido puerto con barcos azules y restaurantes de marisco fresco.",
+  dest_essaouira_h3: "Playa y Surf", dest_essaouira_h3_desc: "Playa amplia ideal para surf, kitesurf y windsurf.",
+  dest_essaouira_h4: "Murallas y Bastiones", dest_essaouira_h4_desc: "Fortificaciones portuguesas del siglo XVIII con vistas al Atlántico.",
+  dest_essaouira_best_time: "Mejor época", dest_essaouira_best_time_desc: "Todo el año. Clima suave gracias al océano.",
+  dest_essaouira_activities: "Actividades principales",
+  dest_essaouira_act1: "Surf y kitesurf", dest_essaouira_act2: "Galerías de arte",
+  dest_essaouira_act3: "Marisco fresco", dest_essaouira_act4: "Excursión a Taghazout"
+};
 
+/* ========================================
+   TRADUCCIONES WEB - 10 IDIOMAS
+   ======================================== */
 const webTranslations = {
-  es: {
-    page_title: "Marruecos Premium - Hoteles y Turismo",
-    page_description: "Tu agencia de confianza para descubrir la magia de Marruecos",
-    logo_main: "Marruecos", logo_sub: "Premium",
-    nav_home: "Inicio", nav_hotels: "Hoteles", nav_tours: "Tours",
-    nav_transport: "Transporte", nav_packages: "Paquetes", nav_contact: "Contacto",
-    hero_title_1: "Descubre la", hero_title_2: "Magia", hero_title_3: "de Marruecos",
-    hero_subtitle: "Vive una experiencia única entre desiertos dorados, medinas milenarias y la hospitalidad bereber",
-    hero_cta: "Reserva ahora", hero_cta2: "Ver destinos",
-    services_title_1: "Nuestros", services_title_2: "Servicios",
-    services_subtitle: "Todo lo que necesitas para una experiencia inolvidable en Marruecos",
-    service_hotel_title: "Alojamiento",
-    service_hotel_desc: "Hoteles de lujo, Riads tradicionales con encanto y apartamentos con vistas espectaculares",
-    service_tours_title: "Tours y Excursiones",
-    service_tours_desc: "Descubre el desierto, las ciudades imperiales y las montañas del Atlas con guías expertos",
-    service_transport_title: "Transporte y Traslados",
-    service_transport_desc: "Servicio privado con conductor, traslados al aeropuerto y alquiler de vehículos",
-    service_packages_title: "Paquetes Completos",
-    service_packages_desc: "Viajes todo incluido diseñados a tu medida con la mejor relación calidad-precio",
-    more_info: "Más información",
-    dest_title_1: "Destinos", dest_title_2: "Destacados",
-    dest_subtitle: "Lugares mágicos que te dejarán sin aliento",
-    tag_popular: "Popular", tag_magic: "Mágico", tag_adventure: "Aventura",
-    dest_marrakech: "Marrakech", dest_marrakech_desc: "La ciudad roja y sus souks mágicos",
-    dest_fez: "Fez", dest_fez_desc: "La capital espiritual y cultural",
-    dest_tangier: "Tánger", dest_tangier_desc: "La puerta de África y Europa",
-    dest_chefchaouen: "Chefchaouen", dest_chefchaouen_desc: "La perla azul del Rif",
-    dest_agadir: "Agadir", dest_agadir_desc: "Playas doradas y sol todo el año",
-    dest_merzouga: "Desierto de Merzouga", dest_merzouga_desc: "Dunas doradas y noches bajo las estrellas",
-    dest_atlas: "Montañas Atlas", dest_atlas_desc: "Paisajes impresionantes y pueblos bereberes",
-    dest_essaouira: "Essaouira", dest_essaouira_desc: "La ciudad de los vientos y el arte",
-    why_title_1: "¿Por qué", why_title_2: "elegirnos",
-    why_subtitle: "Más de 15 años creando experiencias inolvidables en Marruecos",
-    why_local_title: "Experiencia Local", why_local_desc: "Somos marroquíes. Conocemos cada rincón, cada tradición y cada secreto del país",
-    why_price_title: "Precios Competitivos", why_price_desc: "Las mejores tarifas sin intermediarios. Trato directo con hoteles y servicios locales",
-    why_247_title: "Atención 24/7", why_247_desc: "Estamos disponibles las 24 horas, los 7 días de la semana para asistirte",
-    why_guides_title: "Guías Certificados", why_guides_desc: "Guías profesionales multilingües con años de experiencia y pasión por compartir",
-    test_title_1: "Lo que dicen nuestros", test_title_2: "clientes",
-    test_subtitle: "Miles de viajeros han confiado en nosotros",
-    test_1_text: "\"Una experiencia increíble. El riad era espectacular y el tour por el desierto fue mágico.\"",
-    test_1_info: "España - Octubre 2025",
-    test_2_text: "\"Service exceptionnel! Organisation parfaite du début à la fin.\"",
-    test_2_info: "Francia - Marzo 2026",
-    test_3_text: "\"Amazing trip through Morocco! Will definitely come back!\"",
-    test_3_info: "Reino Unido - Mayo 2026",
-    contact_title_1: "Contáctanos", contact_title_2: "ahora",
-    contact_subtitle: "Estamos aquí para ayudarte a planificar tu viaje soñado",
-    contact_whatsapp: "WhatsApp", contact_email: "Email", contact_office: "Oficina",
-    contact_office_city: "Marrakech, Marruecos",
-    footer_about: "Tu agencia de confianza para descubrir la magia de Marruecos con experiencias auténticas y memorables.",
-    footer_quick: "Enlaces Rápidos", footer_destinations: "Destinos", footer_legal_title: "Legal",
-    footer_privacy: "Política de Privacidad", footer_terms: "Términos y Condiciones",
-    footer_cookies: "Política de Cookies", footer_notice: "Aviso Legal",
-    footer_copy: "© 2026 Marruecos Premium. Todos los derechos reservados.",
-    chat_tooltip: "💬 ¿Necesitas ayuda? Habla con nosotros",
-    book_now: "Reservar ahora", plan_visit: "Planificar visita",
-    service_accom_title: "Alojamiento de Lujo y Tradición",
-    service_accom_intro: "Ofrecemos una selección cuidadosa de los mejores alojamientos en Marruecos, combinando lujo, tradición y comodidad.",
-    service_accom_hotels: "Hoteles de Lujo", service_accom_hotels_desc: "Hoteles 5 estrellas con spas, piscinas y vistas panorámicas. Servicio impecable.",
-    service_accom_riads: "Riads Tradicionales", service_accom_riads_desc: "Casas marroquíes con patio interior, decoradas con artesanía local y encanto único.",
-    service_accom_apart: "Apartamentos", service_accom_apart_desc: "Totalmente equipados con cocina, perfectos para familias o estancias largas.",
-    service_accom_camp: "Campamentos Desierto", service_accom_camp_desc: "Jaimas de lujo en las dunas. Noches bajo las estrellas con cena bereber.",
-    service_accom_features: "Características",
-    service_accom_feat1: "WiFi gratuito", service_accom_feat2: "Desayuno incluido",
-    service_accom_feat3: "Aire acondicionado", service_accom_feat4: "Vistas espectaculares",
-    service_accom_feat5: "Atención 24/7", service_accom_feat6: "Traslados disponibles",
-    service_tours_title: "Tours y Excursiones Guiadas",
-    service_tours_intro: "Tours diseñados para mostrarte lo mejor de Marruecos con guías certificados.",
-    service_tours_desert: "Tours al Desierto", service_tours_desert_desc: "Excursiones de 2 a 4 días a Merzouga o Zagora. Paseos en camello y noches en campamento.",
-    service_tours_imperial: "Ciudades Imperiales", service_tours_imperial_desc: "Recorre Fez, Marrakech, Meknes y Rabat. Historia, arquitectura y cultura.",
-    service_tours_atlas: "Montañas del Atlas", service_tours_atlas_desc: "Trekking, pueblos bereberes, cascadas de Ouzoud y el pico Toubkal (4,167m).",
-    service_tours_medina: "Tours Urbanos", service_tours_medina_desc: "Visitas a medinas, souks y monumentos. Descubre los tesoros de cada ciudad.",
-    service_tours_features: "Incluye",
-    service_tours_feat1: "Guía certificado", service_tours_feat2: "Transporte privado",
-    service_tours_feat3: "Alojamiento según tour", service_tours_feat4: "Comidas tradicionales",
-    service_tours_feat5: "Entradas monumentos", service_tours_feat6: "Seguro de viaje",
-    service_transport_title: "Transporte Privado y Traslados",
-    service_transport_intro: "Transporte privado con conductores profesionales y vehículos modernos.",
-    service_transport_airport: "Traslados Aeropuerto", service_transport_airport_desc: "Recogida en todos los aeropuertos. Monitoreo de vuelos y espera sin cargo.",
-    service_transport_intercity: "Entre Ciudades", service_transport_intercity_desc: "Traslados privados con rutas personalizadas y paradas turísticas.",
-    service_transport_driver: "Coche con Conductor", service_transport_driver_desc: "Vehículo con conductor por horas, días o semanas. Flexibilidad total.",
-    service_transport_rental: "Alquiler Vehículos", service_transport_rental_desc: "Flota moderna de coches, SUVs y 4x4. Seguro completo y kilometraje ilimitado.",
-    service_transport_features: "Ventajas",
-    service_transport_feat1: "Conductores profesionales", service_transport_feat2: "Vehículos con AC",
-    service_transport_feat3: "WiFi a bordo", service_transport_feat4: "Agua disponible",
-    service_transport_feat5: "Seguro incluido", service_transport_feat6: "Disponibilidad 24/7",
-    service_packages_title: "Paquetes Turísticos Completos",
-    service_packages_intro: "Paquetes a medida con todo incluido para disfrutar sin preocupaciones.",
-    service_packages_short: "Escapadas Cortas (3-5 días)", service_packages_short_desc: "Perfectas para fin de semana largo. Marrakech y alrededores o desierto.",
-    service_packages_week: "Una Semana (7 días)", service_packages_week_desc: "Circuito clásico: Marrakech - Desierto - Fez - Chefchaouen.",
-    service_packages_grand: "Gran Tour (10-15 días)", service_packages_grand_desc: "Recorrido completo: ciudades imperiales, desierto, montañas y costa.",
-    service_packages_custom: "Paquetes Personalizados", service_packages_custom_desc: "Diseñamos tu viaje a medida según tus intereses y presupuesto.",
-    service_packages_features: "Incluye",
-    service_packages_feat1: "Alojamiento seleccionado", service_packages_feat2: "Desayunos diarios",
-    service_packages_feat3: "Transporte privado", service_packages_feat4: "Guías locales",
-    service_packages_feat5: "Actividades incluidas", service_packages_feat6: "Asistencia 24/7",
-    dest_marrakech_title: "Marrakech - La Ciudad Roja",
-    dest_marrakech_intro: "Marrakech es el corazón palpitante de Marruecos. Conocida como la 'Ciudad Roja', es donde la tradición y la modernidad se encuentran.",
-    dest_marrakech_highlights: "Puntos de Interés",
-    dest_marrakech_h1: "Plaza Jemaa el-Fnaa", dest_marrakech_h1_desc: "Patrimonio UNESCO. De día mercado, de noche festival de comida y música.",
-    dest_marrakech_h2: "Jardín Majorelle", dest_marrakech_h2_desc: "Jardín botánico con característico azul cobalto, antigua propiedad de Yves Saint Laurent.",
-    dest_marrakech_h3: "Medina y Souks", dest_marrakech_h3_desc: "Laberinto de callejuelas con artesanía, especias, textiles y joyas.",
-    dest_marrakech_h4: "Palacio Bahía", dest_marrakech_h4_desc: "Palacio del siglo XIX con jardines y salas decoradas con zellige.",
-    dest_marrakech_best_time: "Mejor época", dest_marrakech_best_time_desc: "Primavera (marzo-mayo) y otoño (septiembre-noviembre).",
-    dest_marrakech_activities: "Actividades principales",
-    dest_marrakech_act1: "Visitar la Koutoubia", dest_marrakech_act2: "Hammam tradicional",
-    dest_marrakech_act3: "Cocina marroquí", dest_marrakech_act4: "Excursión al desierto",
-    dest_fez_title: "Fez - Capital Cultural",
-    dest_fez_intro: "Fez es la capital espiritual y cultural de Marruecos, fundada en el año 789. Su medina es un museo vivo.",
-    dest_fez_highlights: "Puntos de Interés",
-    dest_fez_h1: "Medina de Fez el-Bali", dest_fez_h1_desc: "Patrimonio UNESCO. 9,000 callejuelas sin coches con curtidurías y mezquitas.",
-    dest_fez_h2: "Curtidurías Chouara", dest_fez_h2_desc: "Las famosas tenerías donde se trabaja el cuero como hace mil años.",
-    dest_fez_h3: "Universidad Al Quaraouiyine", dest_fez_h3_desc: "Fundada en 859, la universidad más antigua del mundo aún en funcionamiento.",
-    dest_fez_h4: "Palacio Real", dest_fez_h4_desc: "Residencia del rey con impresionantes puertas de bronce dorado.",
-    dest_fez_best_time: "Mejor época", dest_fez_best_time_desc: "Primavera y otoño son ideales.",
-    dest_fez_activities: "Actividades principales",
-    dest_fez_act1: "Tour guiado medina", dest_fez_act2: "Taller de artesanía",
-    dest_fez_act3: "Cocina tradicional", dest_fez_act4: "Visita a Meknes",
-    dest_tangier_title: "Tánger - La Puerta de África",
-    dest_tangier_intro: "Tánger es donde Europa y África se encuentran. Punto de encuentro de culturas, escritores y artistas durante siglos.",
-    dest_tangier_highlights: "Puntos de Interés",
-    dest_tangier_h1: "Cueva de Hércules", dest_tangier_h1_desc: "Formación natural con vistas al Atlántico. Según la leyenda, aquí descansó Hércules.",
-    dest_tangier_h2: "Medina y Kasbah", dest_tangier_h2_desc: "Centro histórico con calles empinadas y vistas al estrecho de Gibraltar.",
-    dest_tangier_h3: "Cabo Spartel", dest_tangier_h3_desc: "Donde el Atlántico se encuentra con el Mediterráneo. Faro histórico.",
-    dest_tangier_h4: "Gran Socco", dest_tangier_h4_desc: "Plaza principal que conecta la ciudad moderna con la medina.",
-    dest_tangier_best_time: "Mejor época", dest_tangier_best_time_desc: "De abril a octubre. Clima suave todo el año.",
-    dest_tangier_activities: "Actividades principales",
-    dest_tangier_act1: "Paseo por la cornisa", dest_tangier_act2: "Visita a Asilah",
-    dest_tangier_act3: "Excursión a Tetuán", dest_tangier_act4: "Cafés históricos",
-    dest_chefchaouen_title: "Chefchaouen - La Perla Azul",
-    dest_chefchaouen_intro: "Chefchaouen es famosa por sus calles pintadas de azul. Situada en las montañas del Rif, es un remanso de paz.",
-    dest_chefchaouen_highlights: "Puntos de Interés",
-    dest_chefchaouen_h1: "Medina Azul", dest_chefchaouen_h1_desc: "Callejuelas empedradas pintadas de azul. Perfecto para fotografías.",
-    dest_chefchaouen_h2: "Plaza Uta el-Hammam", dest_chefchaouen_h2_desc: "Plaza principal rodeada de cafés. Ideal para tomar té a la menta.",
-    dest_chefchaouen_h3: "Kasbah", dest_chefchaouen_h3_desc: "Fortaleza del siglo XV con jardín andalusí y museo etnográfico.",
-    dest_chefchaouen_h4: "Cascadas de Akchour", dest_chefchaouen_h4_desc: "A 30 minutos, senderismo entre montañas y piscinas naturales.",
-    dest_chefchaouen_best_time: "Mejor época", dest_chefchaouen_best_time_desc: "Primavera y otoño. Verano caluroso pero noches frescas.",
-    dest_chefchaouen_activities: "Actividades principales",
-    dest_chefchaouen_act1: "Fotografía urbana", dest_chefchaouen_act2: "Senderismo Akchour",
-    dest_chefchaouen_act3: "Compras artesanía", dest_chefchaouen_act4: "Excursión a Tetuán",
-    dest_agadir_title: "Agadir - Sol y Playa",
-    dest_agadir_intro: "Agadir es el principal destino de playa de Marruecos, con más de 300 días de sol al año.",
-    dest_agadir_highlights: "Puntos de Interés",
-    dest_agadir_h1: "Playa de Agadir", dest_agadir_h1_desc: "10 km de playa de arena fina con paseo marítimo. Ideal para deportes acuáticos.",
-    dest_agadir_h2: "Kasbah de Agadir", dest_agadir_h2_desc: "Fortaleza en la colina con vistas panorámicas de la bahía.",
-    dest_agadir_h3: "Souk El Had", dest_agadir_h3_desc: "El mercado más grande de Marruecos con más de 6,000 puestos.",
-    dest_agadir_h4: "Valle de los Pájaros", dest_agadir_h4_desc: "Parque zoológico en el centro. Perfecto para familias.",
-    dest_agadir_best_time: "Mejor época", dest_agadir_best_time_desc: "Todo el año. Inviernos suaves (20-25°C) y veranos cálidos.",
-    dest_agadir_activities: "Actividades principales",
-    dest_agadir_act1: "Deportes acuáticos", dest_agadir_act2: "Golf",
-    dest_agadir_act3: "Excursión a Taroudant", dest_agadir_act4: "Vida nocturna",
-    dest_merzouga_title: "Desierto de Merzouga - Dunas Doradas",
-    dest_merzouga_intro: "Merzouga es la puerta al erg Chebbi, un mar de dunas doradas de hasta 150 metros de altura.",
-    dest_merzouga_highlights: "Puntos de Interés",
-    dest_merzouga_h1: "Dunas de Erg Chebbi", dest_merzouga_h1_desc: "Dunas cambiantes de color. Paseos en camello al atardecer.",
-    dest_merzouga_h2: "Campamentos Desierto", dest_merzouga_h2_desc: "Jaimas de lujo. Cena tradicional, música bereber y noches bajo las estrellas.",
-    dest_merzouga_h3: "Ksar de Merzouga", dest_merzouga_h3_desc: "Antiguo granero fortificado. Museo local y vistas al oasis.",
-    dest_merzouga_h4: "Lago Dayet Srji", dest_merzouga_h4_desc: "Lago estacional que atrae flamencos rosas en primavera.",
-    dest_merzouga_best_time: "Mejor época", dest_merzouga_best_time_desc: "Octubre a abril. Evita el verano (supera 45°C).",
-    dest_merzouga_activities: "Actividades principales",
-    dest_merzouga_act1: "Paseo en camello", dest_merzouga_act2: "Sandboarding",
-    dest_merzouga_act3: "Música gnawa", dest_merzouga_act4: "Visita a Rissani",
-    dest_atlas_title: "Montañas del Atlas - Naturaleza Pura",
-    dest_atlas_intro: "La cordillera del Atlas atraviesa Marruecos, ofreciendo paisajes espectaculares y pueblos bereberes.",
-    dest_atlas_highlights: "Puntos de Interés",
-    dest_atlas_h1: "Monte Toubkal", dest_atlas_h1_desc: "4,167m, el pico más alto del Norte de África. Trekking de 2-3 días.",
-    dest_atlas_h2: "Valle de Ourika", dest_atlas_h2_desc: "Valle verde con cascadas y pueblos bereberes. A 30 km de Marrakech.",
-    dest_atlas_h3: "Cascadas de Ouzoud", dest_atlas_h3_desc: "Las cascadas más altas de Marruecos (110m). Monos berberiscos.",
-    dest_atlas_h4: "Valle del Dades", dest_atlas_h4_desc: "Desfiladeros espectaculares, kasbahs y palmerales.",
-    dest_atlas_best_time: "Mejor época", dest_atlas_best_time_desc: "Primavera y otoño para trekking. Invierno para esquiar.",
-    dest_atlas_activities: "Actividades principales",
-    dest_atlas_act1: "Trekking", dest_atlas_act2: "Alpinismo",
-    dest_atlas_act3: "Visita pueblos bereberes", dest_atlas_act4: "Esquí (invierno)",
-    dest_essaouira_title: "Essaouira - Ciudad de los Vientos",
-    dest_essaouira_intro: "Essaouira es una ciudad costera amurallada, paraíso de surfistas y kitesurfistas.",
-    dest_essaouira_highlights: "Puntos de Interés",
-    dest_essaouira_h1: "Medina Amurallada", dest_essaouira_h1_desc: "Patrimonio UNESCO. Galerías de arte, talleres de madera y ambiente bohemio.",
-    dest_essaouira_h2: "Puerto Pesquero", dest_essaouira_h2_desc: "Colorido puerto con barcos azules y restaurantes de marisco fresco.",
-    dest_essaouira_h3: "Playa y Surf", dest_essaouira_h3_desc: "Playa amplia ideal para surf, kitesurf y windsurf.",
-    dest_essaouira_h4: "Murallas y Bastiones", dest_essaouira_h4_desc: "Fortificaciones portuguesas del siglo XVIII con vistas al Atlántico.",
-    dest_essaouira_best_time: "Mejor época", dest_essaouira_best_time_desc: "Todo el año. Clima suave gracias al océano.",
-    dest_essaouira_activities: "Actividades principales",
-    dest_essaouira_act1: "Surf y kitesurf", dest_essaouira_act2: "Galerías de arte",
-    dest_essaouira_act3: "Marisco fresco", dest_essaouira_act4: "Excursión a Taghazout"
-  },
-  // Para los otros idiomas, usaré el fallback a ES para brevedad. En producción incluiría todas las traducciones.
+  es: { ...webTranslationsBase },
   fr: {
     page_title: "Marruecos Premium - Hôtels et Tourisme",
     page_description: "Votre agence de confiance pour découvrir la magie du Maroc",
     logo_main: "Maroc", logo_sub: "Premium",
-    nav_home: "Accueil", nav_hotels: "Hôtels", nav_tours: "Tours",
+    nav_home: "Accueil", nav_hotels: "Hôtels", nav_tours: "Circuits",
     nav_transport: "Transport", nav_packages: "Forfaits", nav_contact: "Contact",
     hero_title_1: "Découvrez la", hero_title_2: "Magie", hero_title_3: "du Maroc",
     hero_subtitle: "Vivez une expérience unique entre déserts dorés, médinas millénaires et hospitalité berbère",
@@ -1049,7 +1052,7 @@ const webTranslations = {
     services_subtitle: "Tout ce dont vous avez besoin pour une expérience inoubliable au Maroc",
     service_hotel_title: "Hébergement",
     service_hotel_desc: "Hôtels de luxe, Riads traditionnels pleins de charme et appartements avec vues spectaculaires",
-    service_tours_title: "Tours et Excursions",
+    service_tours_title: "Circuits et Excursions",
     service_tours_desc: "Découvrez le désert, les villes impériales et les montagnes de l'Atlas avec des guides experts",
     service_transport_title: "Transport et Transferts",
     service_transport_desc: "Service privé avec chauffeur, transferts aéroport et location de véhicules",
@@ -1093,24 +1096,24 @@ const webTranslations = {
     chat_tooltip: "💬 Besoin d'aide? Parlez-nous",
     book_now: "Réserver maintenant", plan_visit: "Planifier la visite",
     service_accom_title: "Hébergement de Luxe et Tradition",
-    service_accom_intro: "Nous offrons une sélection soignée des meilleurs hébergements au Maroc.",
+    service_accom_intro: "Nous offrons une sélection soignée des meilleurs hébergements au Maroc, combinant luxe, tradition et confort.",
     service_accom_hotels: "Hôtels de Luxe", service_accom_hotels_desc: "Hôtels 5 étoiles avec spas, piscines et vues panoramiques.",
-    service_accom_riads: "Riads Traditionnels", service_accom_riads_desc: "Maisons marocaines avec patio intérieur.",
-    service_accom_apart: "Appartements", service_accom_apart_desc: "Totalement équipés avec cuisine.",
-    service_accom_camp: "Campements Désert", service_accom_camp_desc: "Tentes de luxe dans les dunes.",
+    service_accom_riads: "Riads Traditionnels", service_accom_riads_desc: "Maisons marocaines avec patio intérieur, décorées d'artisanat local.",
+    service_accom_apart: "Appartements", service_accom_apart_desc: "Totalement équipés avec cuisine, parfaits pour les familles.",
+    service_accom_camp: "Campements Désert", service_accom_camp_desc: "Tentes de luxe dans les dunes. Nuits sous les étoiles.",
     service_accom_features: "Caractéristiques",
     service_accom_feat1: "WiFi gratuit", service_accom_feat2: "Petit-déjeuner inclus",
     service_accom_feat3: "Climatisation", service_accom_feat4: "Vues spectaculaires",
     service_accom_feat5: "Assistance 24/7", service_accom_feat6: "Transferts disponibles",
-    service_tours_title: "Tours et Excursions Guidées",
-    service_tours_intro: "Tours conçus pour vous montrer le meilleur du Maroc avec des guides certifiés.",
-    service_tours_desert: "Tours au Désert", service_tours_desert_desc: "Excursions de 2 à 4 jours à Merzouga ou Zagora.",
+    service_tours_title: "Circuits et Excursions Guidées",
+    service_tours_intro: "Circuits conçus pour vous montrer le meilleur du Maroc avec des guides certifiés.",
+    service_tours_desert: "Circuits au Désert", service_tours_desert_desc: "Excursions de 2 à 4 jours à Merzouga ou Zagora. Balades à dos de chameau.",
     service_tours_imperial: "Villes Impériales", service_tours_imperial_desc: "Parcourez Fès, Marrakech, Meknès et Rabat.",
-    service_tours_atlas: "Montagnes de l'Atlas", service_tours_atlas_desc: "Trekking, villages berbères et pic Toubkal (4 167m).",
-    service_tours_medina: "Tours Urbains", service_tours_medina_desc: "Visites des médinas, souks et monuments.",
+    service_tours_atlas: "Montagnes de l'Atlas", service_tours_atlas_desc: "Trekking, villages berbères, cascades d'Ouzoud et pic Toubkal (4 167m).",
+    service_tours_medina: "Circuits Urbains", service_tours_medina_desc: "Visites des médinas, souks et monuments.",
     service_tours_features: "Inclus",
     service_tours_feat1: "Guide certifié", service_tours_feat2: "Transport privé",
-    service_tours_feat3: "Hébergement selon tour", service_tours_feat4: "Repas traditionnels",
+    service_tours_feat3: "Hébergement selon circuit", service_tours_feat4: "Repas traditionnels",
     service_tours_feat5: "Entrées monuments", service_tours_feat6: "Assurance voyage",
     service_transport_title: "Transport Privé et Transferts",
     service_transport_intro: "Transport privé avec chauffeurs professionnels et véhicules modernes.",
@@ -1221,150 +1224,290 @@ const webTranslations = {
     dest_essaouira_act1: "Surf et kitesurf", dest_essaouira_act2: "Galeries d'art",
     dest_essaouira_act3: "Fruits de mer frais", dest_essaouira_act4: "Excursion à Taghazout"
   },
-  // Para los otros 8 idiomas (en, nl, de, it, pt, ar, zh, ru), se mantiene el fallback al español
-  // En producción se incluirían las traducciones completas como en el archivo anterior
+  en: {
+    page_title: "Marruecos Premium - Hotels and Tourism",
+    page_description: "Your trusted agency to discover the magic of Morocco",
+    logo_main: "Morocco", logo_sub: "Premium",
+    nav_home: "Home", nav_hotels: "Hotels", nav_tours: "Tours",
+    nav_transport: "Transport", nav_packages: "Packages", nav_contact: "Contact",
+    hero_title_1: "Discover the", hero_title_2: "Magic", hero_title_3: "of Morocco",
+    hero_subtitle: "Live a unique experience among golden deserts, ancient medinas and Berber hospitality",
+    hero_cta: "Book now", hero_cta2: "View destinations",
+    services_title_1: "Our", services_title_2: "Services",
+    services_subtitle: "Everything you need for an unforgettable experience in Morocco",
+    service_hotel_title: "Accommodation",
+    service_hotel_desc: "Luxury hotels, charming traditional riads and apartments with spectacular views",
+    service_tours_title: "Tours and Excursions",
+    service_tours_desc: "Discover the desert, imperial cities and Atlas mountains with expert guides",
+    service_transport_title: "Transport and Transfers",
+    service_transport_desc: "Private service with driver, airport transfers and car rental",
+    service_packages_title: "Complete Packages",
+    service_packages_desc: "All-inclusive trips tailored to you with the best value for money",
+    more_info: "More information",
+    dest_title_1: "Featured", dest_title_2: "Destinations",
+    dest_subtitle: "Magical places that will leave you breathless",
+    tag_popular: "Popular", tag_magic: "Magical", tag_adventure: "Adventure",
+    dest_marrakech: "Marrakech", dest_marrakech_desc: "The red city and its magical souks",
+    dest_fez: "Fez", dest_fez_desc: "The spiritual and cultural capital",
+    dest_tangier: "Tangier", dest_tangier_desc: "The gateway between Africa and Europe",
+    dest_chefchaouen: "Chefchaouen", dest_chefchaouen_desc: "The blue pearl of the Rif",
+    dest_agadir: "Agadir", dest_agadir_desc: "Golden beaches and sun all year round",
+    dest_merzouga: "Merzouga Desert", dest_merzouga_desc: "Golden dunes and nights under the stars",
+    dest_atlas: "Atlas Mountains", dest_atlas_desc: "Impressive landscapes and Berber villages",
+    dest_essaouira: "Essaouira", dest_essaouira_desc: "The city of winds and art",
+    why_title_1: "Why", why_title_2: "choose us",
+    why_subtitle: "Over 15 years creating unforgettable experiences in Morocco",
+    why_local_title: "Local Experience", why_local_desc: "We are Moroccan. We know every corner, every tradition and every secret of the country",
+    why_price_title: "Competitive Prices", why_price_desc: "The best rates without intermediaries. Direct contact with hotels and local services",
+    why_247_title: "24/7 Support", why_247_desc: "We are available 24 hours a day, 7 days a week to assist you",
+    why_guides_title: "Certified Guides", why_guides_desc: "Multilingual professional guides with years of experience and passion for sharing",
+    test_title_1: "What our", test_title_2: "clients say",
+    test_subtitle: "Thousands of travelers have trusted us",
+    test_1_text: "\"An incredible experience. The riad was spectacular and the desert tour magical.\"",
+    test_1_info: "Spain - October 2025",
+    test_2_text: "\"Exceptional service! Perfect organization from start to finish.\"",
+    test_2_info: "France - March 2026",
+    test_3_text: "\"Amazing trip through Morocco! Will definitely come back!\"",
+    test_3_info: "United Kingdom - May 2026",
+    contact_title_1: "Contact us", contact_title_2: "now",
+    contact_subtitle: "We are here to help you plan your dream trip",
+    contact_whatsapp: "WhatsApp", contact_email: "Email", contact_office: "Office",
+    contact_office_city: "Marrakech, Morocco",
+    footer_about: "Your trusted agency to discover the magic of Morocco with authentic and memorable experiences.",
+    footer_quick: "Quick Links", footer_destinations: "Destinations", footer_legal_title: "Legal",
+    footer_privacy: "Privacy Policy", footer_terms: "Terms and Conditions",
+    footer_cookies: "Cookie Policy", footer_notice: "Legal Notice",
+    footer_copy: "© 2026 Marruecos Premium. All rights reserved.",
+    chat_tooltip: "💬 Need help? Talk to us",
+    book_now: "Book now", plan_visit: "Plan visit",
+    service_accom_title: "Luxury and Traditional Accommodation",
+    service_accom_intro: "We offer a careful selection of the best accommodations in Morocco, combining luxury, tradition and comfort.",
+    service_accom_hotels: "Luxury Hotels", service_accom_hotels_desc: "5-star hotels with spas, pools and panoramic views.",
+    service_accom_riads: "Traditional Riads", service_accom_riads_desc: "Moroccan houses with interior courtyard, decorated with local crafts.",
+    service_accom_apart: "Apartments", service_accom_apart_desc: "Fully equipped with kitchen, perfect for families.",
+    service_accom_camp: "Desert Camps", service_accom_camp_desc: "Luxury tents in the dunes. Nights under the stars.",
+    service_accom_features: "Features",
+    service_accom_feat1: "Free WiFi", service_accom_feat2: "Breakfast included",
+    service_accom_feat3: "Air conditioning", service_accom_feat4: "Spectacular views",
+    service_accom_feat5: "24/7 Support", service_accom_feat6: "Transfers available",
+    service_tours_title: "Guided Tours and Excursions",
+    service_tours_intro: "Tours designed to show you the best of Morocco with certified guides.",
+    service_tours_desert: "Desert Tours", service_tours_desert_desc: "2 to 4 day excursions to Merzouga or Zagora. Camel rides.",
+    service_tours_imperial: "Imperial Cities", service_tours_imperial_desc: "Visit Fez, Marrakech, Meknes and Rabat.",
+    service_tours_atlas: "Atlas Mountains", service_tours_atlas_desc: "Trekking, Berber villages, Ouzoud waterfalls and Toubkal peak (4,167m).",
+    service_tours_medina: "City Tours", service_tours_medina_desc: "Visits to medinas, souks and monuments.",
+    service_tours_features: "Includes",
+    service_tours_feat1: "Certified guide", service_tours_feat2: "Private transport",
+    service_tours_feat3: "Accommodation per tour", service_tours_feat4: "Traditional meals",
+    service_tours_feat5: "Monument entries", service_tours_feat6: "Travel insurance",
+    service_transport_title: "Private Transport and Transfers",
+    service_transport_intro: "Private transport with professional drivers and modern vehicles.",
+    service_transport_airport: "Airport Transfers", service_transport_airport_desc: "Pickup at all airports.",
+    service_transport_intercity: "Between Cities", service_transport_intercity_desc: "Private transfers with custom routes.",
+    service_transport_driver: "Car with Driver", service_transport_driver_desc: "Vehicle with driver by hours, days or weeks.",
+    service_transport_rental: "Car Rental", service_transport_rental_desc: "Modern fleet of cars, SUVs and 4x4.",
+    service_transport_features: "Advantages",
+    service_transport_feat1: "Professional drivers", service_transport_feat2: "Vehicles with AC",
+    service_transport_feat3: "WiFi on board", service_transport_feat4: "Water available",
+    service_transport_feat5: "Insurance included", service_transport_feat6: "24/7 availability",
+    service_packages_title: "Complete Tourist Packages",
+    service_packages_intro: "Tailor-made packages with everything included to enjoy without worries.",
+    service_packages_short: "Short Escapes (3-5 days)", service_packages_short_desc: "Perfect for a long weekend.",
+    service_packages_week: "One Week (7 days)", service_packages_week_desc: "Classic circuit: Marrakech - Desert - Fez - Chefchaouen.",
+    service_packages_grand: "Grand Tour (10-15 days)", service_packages_grand_desc: "Complete tour: imperial cities, desert, mountains and coast.",
+    service_packages_custom: "Custom Packages", service_packages_custom_desc: "We design your trip according to your interests.",
+    service_packages_features: "Includes",
+    service_packages_feat1: "Selected accommodation", service_packages_feat2: "Daily breakfasts",
+    service_packages_feat3: "Private transport", service_packages_feat4: "Local guides",
+    service_packages_feat5: "Included activities", service_packages_feat6: "24/7 assistance",
+    dest_marrakech_title: "Marrakech - The Red City",
+    dest_marrakech_intro: "Marrakech is the beating heart of Morocco. Known as the 'Red City'.",
+    dest_marrakech_highlights: "Points of Interest",
+    dest_marrakech_h1: "Jemaa el-Fnaa Square", dest_marrakech_h1_desc: "UNESCO Heritage. Market by day, festival by night.",
+    dest_marrakech_h2: "Majorelle Garden", dest_marrakech_h2_desc: "Botanical garden with characteristic cobalt blue.",
+    dest_marrakech_h3: "Medina and Souks", dest_marrakech_h3_desc: "Labyrinth of alleys with crafts and spices.",
+    dest_marrakech_h4: "Bahia Palace", dest_marrakech_h4_desc: "19th century palace with gardens.",
+    dest_marrakech_best_time: "Best time", dest_marrakech_best_time_desc: "Spring (March-May) and autumn (September-November).",
+    dest_marrakech_activities: "Main activities",
+    dest_marrakech_act1: "Visit Koutoubia", dest_marrakech_act2: "Traditional hammam",
+    dest_marrakech_act3: "Moroccan cuisine", dest_marrakech_act4: "Desert excursion",
+    dest_fez_title: "Fez - Cultural Capital",
+    dest_fez_intro: "Fez is the spiritual and cultural capital of Morocco, founded in 789.",
+    dest_fez_highlights: "Points of Interest",
+    dest_fez_h1: "Fez el-Bali Medina", dest_fez_h1_desc: "UNESCO Heritage. 9,000 car-free alleys.",
+    dest_fez_h2: "Chouara Tanneries", dest_fez_h2_desc: "The famous tanneries.",
+    dest_fez_h3: "Al Quaraouiyine University", dest_fez_h3_desc: "The oldest university in the world.",
+    dest_fez_h4: "Royal Palace", dest_fez_h4_desc: "King's residence with golden bronze doors.",
+    dest_fez_best_time: "Best time", dest_fez_best_time_desc: "Spring and autumn are ideal.",
+    dest_fez_activities: "Main activities",
+    dest_fez_act1: "Guided medina tour", dest_fez_act2: "Craft workshop",
+    dest_fez_act3: "Traditional cuisine", dest_fez_act4: "Visit Meknes",
+    dest_tangier_title: "Tangier - Gateway to Africa",
+    dest_tangier_intro: "Tangier is where Europe and Africa meet.",
+    dest_tangier_highlights: "Points of Interest",
+    dest_tangier_h1: "Caves of Hercules", dest_tangier_h1_desc: "Natural formation with Atlantic views.",
+    dest_tangier_h2: "Medina and Kasbah", dest_tangier_h2_desc: "Historic center with steep streets.",
+    dest_tangier_h3: "Cape Spartel", dest_tangier_h3_desc: "Where the Atlantic meets the Mediterranean.",
+    dest_tangier_h4: "Grand Socco", dest_tangier_h4_desc: "Main square connecting the modern city with the medina.",
+    dest_tangier_best_time: "Best time", dest_tangier_best_time_desc: "April to October.",
+    dest_tangier_activities: "Main activities",
+    dest_tangier_act1: "Corniche walk", dest_tangier_act2: "Visit Asilah",
+    dest_tangier_act3: "Trip to Tetouan", dest_tangier_act4: "Historic cafes",
+    dest_chefchaouen_title: "Chefchaouen - The Blue Pearl",
+    dest_chefchaouen_intro: "Chefchaouen is famous for its blue-painted streets.",
+    dest_chefchaouen_highlights: "Points of Interest",
+    dest_chefchaouen_h1: "Blue Medina", dest_chefchaouen_h1_desc: "Cobblestone alleys painted in blue.",
+    dest_chefchaouen_h2: "Uta el-Hammam Square", dest_chefchaouen_h2_desc: "Main square surrounded by cafes.",
+    dest_chefchaouen_h3: "Kasbah", dest_chefchaouen_h3_desc: "15th century fortress.",
+    dest_chefchaouen_h4: "Akchour Waterfalls", dest_chefchaouen_h4_desc: "30 minutes away, hiking and natural pools.",
+    dest_chefchaouen_best_time: "Best time", dest_chefchaouen_best_time_desc: "Spring and autumn.",
+    dest_chefchaouen_activities: "Main activities",
+    dest_chefchaouen_act1: "Urban photography", dest_chefchaouen_act2: "Akchour hiking",
+    dest_chefchaouen_act3: "Craft shopping", dest_chefchaouen_act4: "Trip to Tetouan",
+    dest_agadir_title: "Agadir - Sun and Beach",
+    dest_agadir_intro: "Agadir is Morocco's main beach destination.",
+    dest_agadir_highlights: "Points of Interest",
+    dest_agadir_h1: "Agadir Beach", dest_agadir_h1_desc: "10 km of fine sand beach.",
+    dest_agadir_h2: "Agadir Kasbah", dest_agadir_h2_desc: "Hilltop fortress.",
+    dest_agadir_h3: "Souk El Had", dest_agadir_h3_desc: "Morocco's largest market.",
+    dest_agadir_h4: "Bird Valley", dest_agadir_h4_desc: "City zoo.",
+    dest_agadir_best_time: "Best time", dest_agadir_best_time_desc: "All year round.",
+    dest_agadir_activities: "Main activities",
+    dest_agadir_act1: "Water sports", dest_agadir_act2: "Golf",
+    dest_agadir_act3: "Trip to Taroudant", dest_agadir_act4: "Nightlife",
+    dest_merzouga_title: "Merzouga Desert - Golden Dunes",
+    dest_merzouga_intro: "Merzouga is the gateway to erg Chebbi, a sea of golden dunes.",
+    dest_merzouga_highlights: "Points of Interest",
+    dest_merzouga_h1: "Erg Chebbi Dunes", dest_merzouga_h1_desc: "Color-changing dunes.",
+    dest_merzouga_h2: "Desert Camps", dest_merzouga_h2_desc: "Luxury tents.",
+    dest_merzouga_h3: "Merzouga Ksar", dest_merzouga_h3_desc: "Ancient fortified granary.",
+    dest_merzouga_h4: "Dayet Srji Lake", dest_merzouga_h4_desc: "Seasonal lake.",
+    dest_merzouga_best_time: "Best time", dest_merzouga_best_time_desc: "October to April.",
+    dest_merzouga_activities: "Main activities",
+    dest_merzouga_act1: "Camel ride", dest_merzouga_act2: "Sandboarding",
+    dest_merzouga_act3: "Gnawa music", dest_merzouga_act4: "Visit Rissani",
+    dest_atlas_title: "Atlas Mountains - Pure Nature",
+    dest_atlas_intro: "The Atlas range crosses Morocco.",
+    dest_atlas_highlights: "Points of Interest",
+    dest_atlas_h1: "Mount Toubkal", dest_atlas_h1_desc: "4,167m, the highest peak in North Africa.",
+    dest_atlas_h2: "Ourika Valley", dest_atlas_h2_desc: "Green valley with waterfalls.",
+    dest_atlas_h3: "Ouzoud Waterfalls", dest_atlas_h3_desc: "Morocco's highest waterfalls.",
+    dest_atlas_h4: "Dades Valley", dest_atlas_h4_desc: "Spectacular gorges.",
+    dest_atlas_best_time: "Best time", dest_atlas_best_time_desc: "Spring and autumn for trekking.",
+    dest_atlas_activities: "Main activities",
+    dest_atlas_act1: "Trekking", dest_atlas_act2: "Mountaineering",
+    dest_atlas_act3: "Visit Berber villages", dest_atlas_act4: "Skiing (winter)",
+    dest_essaouira_title: "Essaouira - City of Winds",
+    dest_essaouira_intro: "Essaouira is a walled coastal city.",
+    dest_essaouira_highlights: "Points of Interest",
+    dest_essaouira_h1: "Walled Medina", dest_essaouira_h1_desc: "UNESCO Heritage.",
+    dest_essaouira_h2: "Fishing Port", dest_essaouira_h2_desc: "Colorful port with blue boats.",
+    dest_essaouira_h3: "Beach and Surf", dest_essaouira_h3_desc: "Wide beach ideal for surf.",
+    dest_essaouira_h4: "Walls and Bastions", dest_essaouira_h4_desc: "18th century Portuguese fortifications.",
+    dest_essaouira_best_time: "Best time", dest_essaouira_best_time_desc: "All year round.",
+    dest_essaouira_activities: "Main activities",
+    dest_essaouira_act1: "Surf and kitesurf", dest_essaouira_act2: "Art galleries",
+    dest_essaouira_act3: "Fresh seafood", dest_essaouira_act4: "Trip to Taghazout"
+  }
 };
 
-// Copio las traducciones completas para los otros idiomas del archivo anterior
-// (por limitación de espacio, usaré un approach simplificado manteniendo solo es y fr completos)
-// Para producción, incluiría aquí las traducciones completas de en, nl, de, it, pt, ar, zh, ru
+// Para los otros 7 idiomas, usar el español como base y traducir solo las claves principales
+const webTranslationsOther = {
+  nl: { logo_main: "Marokko", nav_home: "Home", nav_hotels: "Hotels", nav_tours: "Tours", nav_transport: "Vervoer", nav_packages: "Pakketten", nav_contact: "Contact", hero_title_1: "Ontdek de", hero_title_2: "Magie", hero_title_3: "van Marokko", hero_cta: "Boek nu", hero_cta2: "Bekijk bestemmingen", services_title_1: "Onze", services_title_2: "Diensten", more_info: "Meer informatie", dest_title_1: "Uitgelichte", dest_title_2: "Bestemmingen", why_title_1: "Waarom", why_title_2: "ons kiezen", test_title_1: "Wat onze", test_title_2: "klanten zeggen", contact_title_1: "Neem contact op", contact_title_2: "nu", footer_quick: "Snelle Links", footer_destinations: "Bestemmingen", footer_legal_title: "Juridisch", book_now: "Boek nu", plan_visit: "Plan bezoek", chat_tooltip: "💬 Hulp nodig? Praat met ons", footer_copy: "© 2026 Marruecos Premium. Alle rechten voorbehouden." },
+  de: { logo_main: "Marokko", nav_home: "Startseite", nav_hotels: "Hotels", nav_tours: "Touren", nav_transport: "Transport", nav_packages: "Pakete", nav_contact: "Kontakt", hero_title_1: "Entdecken Sie die", hero_title_2: "Magie", hero_title_3: "Marokkos", hero_cta: "Jetzt buchen", hero_cta2: "Ziele ansehen", services_title_1: "Unsere", services_title_2: "Dienstleistungen", more_info: "Mehr Informationen", dest_title_1: "Ausgewählte", dest_title_2: "Reiseziele", why_title_1: "Warum", why_title_2: "uns wählen", test_title_1: "Was unsere", test_title_2: "Kunden sagen", contact_title_1: "Kontaktieren Sie uns", contact_title_2: "jetzt", footer_quick: "Schnelllinks", footer_destinations: "Reiseziele", footer_legal_title: "Rechtliches", book_now: "Jetzt buchen", plan_visit: "Besuch planen", chat_tooltip: "💬 Hilfe benötigt? Sprechen Sie mit uns", footer_copy: "© 2026 Marruecos Premium. Alle Rechte vorbehalten." },
+  it: { logo_main: "Marocco", nav_home: "Home", nav_hotels: "Hotel", nav_tours: "Tour", nav_transport: "Trasporti", nav_packages: "Pacchetti", nav_contact: "Contatti", hero_title_1: "Scopri la", hero_title_2: "Magia", hero_title_3: "del Marocco", hero_cta: "Prenota ora", hero_cta2: "Vedi destinazioni", services_title_1: "I Nostri", services_title_2: "Servizi", more_info: "Più informazioni", dest_title_1: "Destinazioni", dest_title_2: "in Evidenza", why_title_1: "Perché", why_title_2: "sceglierci", test_title_1: "Cosa dicono i nostri", test_title_2: "clienti", contact_title_1: "Contattaci", contact_title_2: "ora", footer_quick: "Link Rapidi", footer_destinations: "Destinazioni", footer_legal_title: "Legale", book_now: "Prenota ora", plan_visit: "Pianifica visita", chat_tooltip: "💬 Hai bisogno di aiuto? Parlaci", footer_copy: "© 2026 Marruecos Premium. Tutti i diritti riservati." },
+  pt: { logo_main: "Marrocos", nav_home: "Início", nav_hotels: "Hotéis", nav_tours: "Tours", nav_transport: "Transporte", nav_packages: "Pacotes", nav_contact: "Contato", hero_title_1: "Descubra a", hero_title_2: "Magia", hero_title_3: "de Marrocos", hero_cta: "Reserve agora", hero_cta2: "Ver destinos", services_title_1: "Nossos", services_title_2: "Serviços", more_info: "Mais informações", dest_title_1: "Destinos", dest_title_2: "em Destaque", why_title_1: "Por que", why_title_2: "nos escolher", test_title_1: "O que nossos", test_title_2: "clientes dizem", contact_title_1: "Contate-nos", contact_title_2: "agora", footer_quick: "Links Rápidos", footer_destinations: "Destinos", footer_legal_title: "Legal", book_now: "Reserve agora", plan_visit: "Planejar visita", chat_tooltip: "💬 Precisa de ajuda? Fale conosco", footer_copy: "© 2026 Marruecos Premium. Todos os direitos reservados." },
+  ar: { logo_main: "المغرب", nav_home: "الرئيسية", nav_hotels: "الفنادق", nav_tours: "الجولات", nav_transport: "النقل", nav_packages: "الباقات", nav_contact: "اتصل بنا", hero_title_1: "اكتشف", hero_title_2: "سحر", hero_title_3: "المغرب", hero_cta: "احجز الآن", hero_cta2: "شاهد الوجهات", services_title_1: "خدماتنا", services_title_2: "", more_info: "مزيد من المعلومات", dest_title_1: "الوجهات", dest_title_2: "المميزة", why_title_1: "لماذا", why_title_2: "تختارنا", test_title_1: "ماذا يقول", test_title_2: "عملاؤنا", contact_title_1: "اتصل بنا", contact_title_2: "الآن", footer_quick: "روابط سريعة", footer_destinations: "الوجهات", footer_legal_title: "قانوني", book_now: "احجز الآن", plan_visit: "خطط للزيارة", chat_tooltip: "💬 هل تحتاج مساعدة؟ تحدث معنا", footer_copy: "© 2026 المغرب بريميوم. جميع الحقوق محفوظة." },
+  zh: { logo_main: "摩洛哥", nav_home: "首页", nav_hotels: "酒店", nav_tours: "旅游", nav_transport: "交通", nav_packages: "套餐", nav_contact: "联系", hero_title_1: "探索", hero_title_2: "魔力", hero_title_3: "摩洛哥", hero_cta: "立即预订", hero_cta2: "查看目的地", services_title_1: "我们的", services_title_2: "服务", more_info: "更多信息", dest_title_1: "精选", dest_title_2: "目的地", why_title_1: "为什么", why_title_2: "选择我们", test_title_1: "我们的", test_title_2: "客户说", contact_title_1: "立即", contact_title_2: "联系我们", footer_quick: "快速链接", footer_destinations: "目的地", footer_legal_title: "法律", book_now: "立即预订", plan_visit: "计划访问", chat_tooltip: "💬 需要帮助？与我们联系", footer_copy: "© 2026 Marruecos Premium. 保留所有权利。" },
+  ru: { logo_main: "Марокко", nav_home: "Главная", nav_hotels: "Отели", nav_tours: "Туры", nav_transport: "Транспорт", nav_packages: "Пакеты", nav_contact: "Контакты", hero_title_1: "Откройте", hero_title_2: "Магию", hero_title_3: "Марокко", hero_cta: "Забронировать", hero_cta2: "Смотреть направления", services_title_1: "Наши", services_title_2: "Услуги", more_info: "Больше информации", dest_title_1: "Избранные", dest_title_2: "Направления", why_title_1: "Почему", why_title_2: "выбрать нас", test_title_1: "Что говорят наши", test_title_2: "клиенты", contact_title_1: "Свяжитесь с нами", contact_title_2: "сейчас", footer_quick: "Быстрые Ссылки", footer_destinations: "Направления", footer_legal_title: "Правовая Информация", book_now: "Забронировать", plan_visit: "Планировать визит", chat_tooltip: "💬 Нужна помощь? Поговорите с нами", footer_copy: "© 2026 Marruecos Premium. Все права защищены." }
+};
 
-['en', 'nl', 'de', 'it', 'pt', 'ar', 'zh', 'ru'].forEach(lang => {
-  webTranslations[lang] = { ...webTranslations.es }; // Fallback
+// Combinar traducciones base con las específicas de cada idioma
+['nl', 'de', 'it', 'pt', 'ar', 'zh', 'ru'].forEach(lang => {
+  webTranslations[lang] = { ...webTranslationsBase, ...webTranslationsOther[lang] };
 });
 
-// Reemplazo con traducciones específicas para EN (como ejemplo, los otros idiomas seguirían el mismo patrón)
-Object.assign(webTranslations.en, {
-  logo_main: "Morocco", logo_sub: "Premium",
-  nav_home: "Home", nav_hotels: "Hotels", nav_tours: "Tours",
-  nav_transport: "Transport", nav_packages: "Packages", nav_contact: "Contact",
-  hero_title_1: "Discover the", hero_title_2: "Magic", hero_title_3: "of Morocco",
-  hero_subtitle: "Live a unique experience among golden deserts, ancient medinas and Berber hospitality",
-  hero_cta: "Book now", hero_cta2: "View destinations",
-  services_title_1: "Our", services_title_2: "Services",
-  services_subtitle: "Everything you need for an unforgettable experience in Morocco",
-  service_hotel_title: "Accommodation",
-  service_hotel_desc: "Luxury hotels, charming traditional riads and apartments with spectacular views",
-  service_tours_title: "Tours and Excursions",
-  service_tours_desc: "Discover the desert, imperial cities and Atlas mountains with expert guides",
-  service_transport_title: "Transport and Transfers",
-  service_transport_desc: "Private service with driver, airport transfers and car rental",
-  service_packages_title: "Complete Packages",
-  service_packages_desc: "All-inclusive trips tailored to you with the best value for money",
-  more_info: "More information",
-  dest_title_1: "Featured", dest_title_2: "Destinations",
-  dest_subtitle: "Magical places that will leave you breathless",
-  tag_popular: "Popular", tag_magic: "Magical", tag_adventure: "Adventure",
-  dest_marrakech: "Marrakech", dest_marrakech_desc: "The red city and its magical souks",
-  dest_fez: "Fez", dest_fez_desc: "The spiritual and cultural capital",
-  dest_tangier: "Tangier", dest_tangier_desc: "The gateway between Africa and Europe",
-  dest_chefchaouen: "Chefchaouen", dest_chefchaouen_desc: "The blue pearl of the Rif",
-  dest_agadir: "Agadir", dest_agadir_desc: "Golden beaches and sun all year round",
-  dest_merzouga: "Merzouga Desert", dest_merzouga_desc: "Golden dunes and nights under the stars",
-  dest_atlas: "Atlas Mountains", dest_atlas_desc: "Impressive landscapes and Berber villages",
-  dest_essaouira: "Essaouira", dest_essaouira_desc: "The city of winds and art",
-  why_title_1: "Why", why_title_2: "choose us",
-  why_subtitle: "Over 15 years creating unforgettable experiences in Morocco",
-  why_local_title: "Local Experience", why_local_desc: "We are Moroccan. We know every corner, every tradition and every secret of the country",
-  why_price_title: "Competitive Prices", why_price_desc: "The best rates without intermediaries",
-  why_247_title: "24/7 Support", why_247_desc: "We are available 24 hours a day, 7 days a week",
-  why_guides_title: "Certified Guides", why_guides_desc: "Multilingual professional guides with years of experience",
-  test_title_1: "What our", test_title_2: "clients say",
-  test_subtitle: "Thousands of travelers have trusted us",
-  test_1_text: "\"An incredible experience. The riad was spectacular and the desert tour magical.\"",
-  test_1_info: "Spain - October 2025",
-  test_2_text: "\"Exceptional service! Perfect organization from start to finish.\"",
-  test_2_info: "France - March 2026",
-  test_3_text: "\"Amazing trip through Morocco! Will definitely come back!\"",
-  test_3_info: "United Kingdom - May 2026",
-  contact_title_1: "Contact us", contact_title_2: "now",
-  contact_subtitle: "We are here to help you plan your dream trip",
-  contact_whatsapp: "WhatsApp", contact_email: "Email", contact_office: "Office",
-  contact_office_city: "Marrakech, Morocco",
-  footer_about: "Your trusted agency to discover the magic of Morocco.",
-  footer_quick: "Quick Links", footer_destinations: "Destinations", footer_legal_title: "Legal",
-  footer_privacy: "Privacy Policy", footer_terms: "Terms and Conditions",
-  footer_cookies: "Cookie Policy", footer_notice: "Legal Notice",
-  footer_copy: "© 2026 Marruecos Premium. All rights reserved.",
-  chat_tooltip: "💬 Need help? Talk to us",
-  book_now: "Book now", plan_visit: "Plan visit"
-});
+/* ========================================
+   TRADUCCIONES CHATBOT - BASE (ES)
+   ======================================== */
+const chatTranslationsBase = {
+  welcome: "¡Hola! 👋 Soy tu asistente de Marruecos Premium. ¿En qué idioma prefieres hablar?",
+  title: "Asistente Marruecos", status: "● En línea", placeholder: "Escribe tu mensaje...",
+  tooltip: "💬 ¿Necesitas ayuda? Habla con nosotros",
+  goal: "¿Qué te gustaría hacer hoy?",
+  goal_options: ["🏨 Reservar alojamiento", "🗺️ Contratar tour/excursión", "🚗 Servicio de transporte", "🎁 Paquete turístico completo", "ℹ️ Información general"],
+  city: "¿En qué ciudad o zona te gustaría alojarte?",
+  city_options: ["Marrakech", "Fez", "Tánger", "Agadir", "Chefchaouen", "Desierto (Merzouga)", "Montañas Atlas", "Essaouira", "Otra ciudad"],
+  dates: "¿Cuáles son tus fechas aproximadas de estancia?",
+  persons: "¿Cuántas personas viajarán? (adultos y niños)",
+  accom_type: "¿Qué tipo de alojamiento prefieres?",
+  accom_type_options: ["🏨 Hotel de lujo", "🕌 Riad tradicional", "🏠 Apartamento", "🛏️ Hostal económico", "⛺ Campamento en el desierto"],
+  board: "¿Qué régimen prefieres?",
+  board_options: ["Solo alojamiento", "Desayuno incluido", "Media pensión", "Todo incluido"],
+  amenities: "¿Qué servicios son importantes para ti?",
+  amenities_options: ["Piscina", "Spa", "WiFi", "Parking", "Aire acondicionado", "Vista especial"],
+  budget_accom: "¿Cuál es tu presupuesto aproximado por noche?",
+  tour_type: "¿Qué tipo de tour te interesa?",
+  tour_type_options: ["🏜️ Desierto 2-3 días", "🏛️ Ciudades imperiales", "⛰️ Montañas Atlas", "🕌 Medina local", "🧗 Aventura"],
+  tour_persons: "¿Cuántas personas participarán en el tour?",
+  tour_duration: "¿Qué duración prefieres?",
+  tour_duration_options: ["Medio día", "Día completo", "2-3 días", "Más de 3 días"],
+  tour_dates: "¿Para qué fechas te gustaría realizar el tour?",
+  tour_lang: "¿En qué idioma prefieres el guía?",
+  tour_lang_options: ["Español", "Francés", "Inglés", "Italiano", "Alemán"],
+  tour_meals: "¿Quieres que incluya comidas y/o alojamiento?",
+  tour_meals_options: ["Sí, todo incluido", "Solo comidas", "No, solo el tour", "Parcial"],
+  tour_budget: "¿Cuál es tu presupuesto aproximado por persona?",
+  transport_type: "¿Qué tipo de transporte necesitas?",
+  transport_type_options: ["✈️ Traslado aeropuerto", "🛣️ Entre ciudades", "🚗 Coche con conductor", "🔑 Alquiler sin conductor"],
+  transport_origin: "¿Cuál es el origen?",
+  transport_dest: "¿Cuál es el destino?",
+  transport_datetime: "¿Fecha y hora aproximada?",
+  transport_persons: "¿Cuántas personas viajarán?",
+  transport_vehicle: "¿Qué tipo de vehículo prefieres?",
+  transport_vehicle_options: ["💰 Económico", "🚙 SUV 4x4", "🚐 Minivan", "✨ Lujo"],
+  transport_budget: "¿Cuál es tu presupuesto aproximado?",
+  package_duration: "¿Cuántos días durará tu viaje?",
+  package_duration_options: ["3-5 días", "1 semana", "2 semanas", "Más de 2 semanas"],
+  package_cities: "¿Qué ciudades te gustaría visitar?",
+  package_persons: "¿Cuántas personas viajarán?",
+  package_dates: "¿Fechas aproximadas del viaje?",
+  package_include: "¿Qué quieres que incluya el paquete?",
+  package_include_options: ["✈️ Vuelos", "🏨 Alojamiento", "🚗 Transporte interno", "👨‍🏫 Guía", "🍽️ Comidas", "🎁 Todo incluido"],
+  package_budget: "¿Cuál es tu presupuesto total por persona?",
+  nationality: "¿Cuál es tu nacionalidad?",
+  travel_time: "¿Cuándo planeas realizar el viaje?",
+  travel_time_options: ["⚡ Inmediato (próximas semanas)", "📅 1-3 meses", "🗓️ 3-6 meses", "💭 Solo estoy planificando"],
+  full_name: "¿Cuál es tu nombre completo?",
+  email: "¿Cuál es tu email de contacto?",
+  whatsapp: "¿Cuál es tu número de WhatsApp? (con código de país, ej: +34600000000)",
+  review: "📋 Revisa tus datos antes de enviar:",
+  review_title: "RESUMEN DE TU SOLICITUD",
+  send_whatsapp: "✅ Enviar por WhatsApp", edit_data: "✏️ Modificar datos",
+  success: "¡Perfecto! Te redirigimos a WhatsApp para finalizar tu reserva. ¡Gracias por confiar en nosotros!",
+  invalid_email: "⚠️ El email no parece válido. ¿Puedes verificarlo?",
+  invalid_phone: "⚠️ El número debe incluir el código de país (ej: +212690157092)",
+  invalid_name: "⚠️ Por favor, introduce tu nombre (mínimo 2 caracteres)",
+  general_info: "¡Con mucho gusto! En Marruecos Premium ofrecemos:\n\n🏨 Alojamiento en hoteles, riads y apartamentos\n🗺️ Tours al desierto, ciudades imperiales y montañas\n🚗 Transporte privado con conductor\n🎁 Paquetes turísticos a medida\n\n¿Qué deseas hacer?",
+  general_info_followup: "¿Te gustaría reservar alguno de nuestros servicios o necesitas más información?",
+  general_info_options: ["🏨 Reservar alojamiento", "🗺️ Reservar tour", "🚗 Reservar transporte", "🎁 Reservar paquete", "👋 No, gracias, solo era información"],
+  add_more: "Añadir otro", continue: "Continuar",
+  thanks_goodbye: "¡Gracias por tu interés! Si necesitas algo más, no dudes en escribirnos. ¡Hasta pronto! 👋",
+  sent_from: "Enviado desde la web de Marruecos Premium",
+  label_service: "Servicio", label_persons: "Personas", label_budget: "Presupuesto",
+  label_city: "Ciudad", label_dates: "Fechas", label_type: "Tipo", label_board: "Régimen",
+  label_amenities: "Servicios", label_tourType: "Tipo de tour", label_duration: "Duración",
+  label_guideLang: "Idioma guía", label_meals: "Comidas", label_origin: "Origen",
+  label_destination: "Destino", label_datetime: "Fecha/Hora", label_vehicle: "Vehículo",
+  label_cities: "Ciudades", label_includes: "Incluye", label_nationality: "Nacionalidad",
+  label_travelTime: "Plazo", label_fullName: "Nombre"
+};
 
+/* ========================================
+   TRADUCCIONES CHATBOT - 10 IDIOMAS
+   ======================================== */
 const chatTranslations = {
-  es: {
-    welcome: "¡Hola! 👋 Soy tu asistente de Marruecos Premium. ¿En qué idioma prefieres hablar?",
-    title: "Asistente Marruecos", status: "● En línea", placeholder: "Escribe tu mensaje...",
-    tooltip: "💬 ¿Necesitas ayuda? Habla con nosotros",
-    goal: "¿Qué te gustaría hacer hoy?",
-    goal_options: ["🏨 Reservar alojamiento", "🗺️ Contratar tour/excursión", "🚗 Servicio de transporte", "🎁 Paquete turístico completo", "ℹ️ Información general"],
-    city: "¿En qué ciudad o zona te gustaría alojarte?",
-    city_options: ["Marrakech", "Fez", "Tánger", "Agadir", "Chefchaouen", "Desierto (Merzouga)", "Montañas Atlas", "Essaouira", "Otra ciudad"],
-    dates: "¿Cuáles son tus fechas aproximadas de estancia?",
-    persons: "¿Cuántas personas viajarán? (adultos y niños)",
-    accom_type: "¿Qué tipo de alojamiento prefieres?",
-    accom_type_options: ["🏨 Hotel de lujo", "🕌 Riad tradicional", "🏠 Apartamento", "🛏️ Hostal económico", "⛺ Campamento en el desierto"],
-    board: "¿Qué régimen prefieres?",
-    board_options: ["Solo alojamiento", "Desayuno incluido", "Media pensión", "Todo incluido"],
-    amenities: "¿Qué servicios son importantes para ti?",
-    amenities_options: ["Piscina", "Spa", "WiFi", "Parking", "Aire acondicionado", "Vista especial"],
-    budget_accom: "¿Cuál es tu presupuesto aproximado por noche?",
-    tour_type: "¿Qué tipo de tour te interesa?",
-    tour_type_options: ["🏜️ Desierto 2-3 días", "🏛️ Ciudades imperiales", "⛰️ Montañas Atlas", "🕌 Medina local", "🧗 Aventura"],
-    tour_persons: "¿Cuántas personas participarán en el tour?",
-    tour_duration: "¿Qué duración prefieres?",
-    tour_duration_options: ["Medio día", "Día completo", "2-3 días", "Más de 3 días"],
-    tour_dates: "¿Para qué fechas te gustaría realizar el tour?",
-    tour_lang: "¿En qué idioma prefieres el guía?",
-    tour_lang_options: ["Español", "Francés", "Inglés", "Italiano", "Alemán"],
-    tour_meals: "¿Quieres que incluya comidas y/o alojamiento?",
-    tour_meals_options: ["Sí, todo incluido", "Solo comidas", "No, solo el tour", "Parcial"],
-    tour_budget: "¿Cuál es tu presupuesto aproximado por persona?",
-    transport_type: "¿Qué tipo de transporte necesitas?",
-    transport_type_options: ["✈️ Traslado aeropuerto", "🛣️ Entre ciudades", "🚗 Coche con conductor", "🔑 Alquiler sin conductor"],
-    transport_origin: "¿Cuál es el origen?",
-    transport_dest: "¿Cuál es el destino?",
-    transport_datetime: "¿Fecha y hora aproximada?",
-    transport_persons: "¿Cuántas personas viajarán?",
-    transport_vehicle: "¿Qué tipo de vehículo prefieres?",
-    transport_vehicle_options: ["💰 Económico", "🚙 SUV 4x4", "🚐 Minivan", "✨ Lujo"],
-    transport_budget: "¿Cuál es tu presupuesto aproximado?",
-    package_duration: "¿Cuántos días durará tu viaje?",
-    package_duration_options: ["3-5 días", "1 semana", "2 semanas", "Más de 2 semanas"],
-    package_cities: "¿Qué ciudades te gustaría visitar?",
-    package_persons: "¿Cuántas personas viajarán?",
-    package_dates: "¿Fechas aproximadas del viaje?",
-    package_include: "¿Qué quieres que incluya el paquete?",
-    package_include_options: ["✈️ Vuelos", "🏨 Alojamiento", "🚗 Transporte interno", "👨‍🏫 Guía", "🍽️ Comidas", "🎁 Todo incluido"],
-    package_budget: "¿Cuál es tu presupuesto total por persona?",
-    nationality: "¿Cuál es tu nacionalidad?",
-    travel_time: "¿Cuándo planeas realizar el viaje?",
-    travel_time_options: ["⚡ Inmediato (próximas semanas)", "📅 1-3 meses", "🗓️ 3-6 meses", "💭 Solo estoy planificando"],
-    full_name: "¿Cuál es tu nombre completo?",
-    email: "¿Cuál es tu email de contacto?",
-    whatsapp: "¿Cuál es tu número de WhatsApp? (con código de país, ej: +34600000000)",
-    review: "📋 Revisa tus datos antes de enviar:",
-    review_title: "RESUMEN DE TU SOLICITUD",
-    send_whatsapp: "✅ Enviar por WhatsApp", edit_data: "✏️ Modificar datos",
-    success: "¡Perfecto! Te redirigimos a WhatsApp para finalizar tu reserva. ¡Gracias por confiar en nosotros!",
-    invalid_email: "⚠️ El email no parece válido. ¿Puedes verificarlo?",
-    invalid_phone: "⚠️ El número debe incluir el código de país (ej: +212690157092)",
-    invalid_name: "⚠️ Por favor, introduce tu nombre (mínimo 2 caracteres)",
-    general_info: "¡Con mucho gusto! En Marruecos Premium ofrecemos:\n\n🏨 Alojamiento en hoteles, riads y apartamentos\n🗺️ Tours al desierto, ciudades imperiales y montañas\n🚗 Transporte privado con conductor\n🎁 Paquetes turísticos a medida\n\n¿Qué deseas hacer?",
-    general_info_followup: "¿Te gustaría reservar alguno de nuestros servicios o necesitas más información?",
-    general_info_options: ["🏨 Reservar alojamiento", "🗺️ Reservar tour", "🚗 Reservar transporte", "🎁 Reservar paquete", "👋 No, gracias, solo era información"],
-    add_more: "Añadir otro", continue: "Continuar",
-    already_selected: "Ya seleccionado",
-    back_to_menu: "Volver al menú principal",
-    thanks_goodbye: "¡Gracias por tu interés! Si necesitas algo más, no dudes en escribirnos. ¡Hasta pronto! 👋",
-    sent_from: "Enviado desde la web de Marruecos Premium",
-    label_service: "Servicio", label_persons: "Personas", label_budget: "Presupuesto",
-    label_city: "Ciudad", label_dates: "Fechas", label_type: "Tipo", label_board: "Régimen",
-    label_amenities: "Servicios", label_tourType: "Tipo de tour", label_duration: "Duración",
-    label_guideLang: "Idioma guía", label_meals: "Comidas", label_origin: "Origen",
-    label_destination: "Destino", label_datetime: "Fecha/Hora", label_vehicle: "Vehículo",
-    label_cities: "Ciudades", label_includes: "Incluye", label_nationality: "Nacionalidad",
-    label_travelTime: "Plazo", label_fullName: "Nombre"
-  },
+  es: { ...chatTranslationsBase },
   fr: {
     welcome: "Bonjour! 👋 Je suis votre assistant Marruecos Premium. Dans quelle langue préférez-vous?",
     title: "Assistant Maroc", status: "● En ligne", placeholder: "Écrivez votre message...",
@@ -1414,8 +1557,6 @@ const chatTranslations = {
     general_info_followup: "Souhaitez-vous réserver l'un de nos services ou avez-vous besoin de plus d'informations?",
     general_info_options: ["🏨 Réserver hébergement", "🗺️ Réserver tour", "🚗 Réserver transport", "🎁 Réserver forfait", "👋 Non merci, juste une information"],
     add_more: "Ajouter", continue: "Continuer",
-    already_selected: "Déjà sélectionné",
-    back_to_menu: "Retour au menu principal",
     thanks_goodbye: "Merci pour votre intérêt! Si vous avez besoin de plus, n'hésitez pas à nous écrire. À bientôt! 👋",
     sent_from: "Envoyé depuis le site Marruecos Premium",
     label_service: "Service", label_persons: "Personnes", label_budget: "Budget",
@@ -1475,8 +1616,6 @@ const chatTranslations = {
     general_info_followup: "Would you like to book any of our services or need more information?",
     general_info_options: ["🏨 Book accommodation", "🗺️ Book tour", "🚗 Book transport", "🎁 Book package", "👋 No thanks, just information"],
     add_more: "Add another", continue: "Continue",
-    already_selected: "Already selected",
-    back_to_menu: "Back to main menu",
     thanks_goodbye: "Thank you for your interest! If you need anything else, don't hesitate to write to us. See you soon! 👋",
     sent_from: "Sent from Marruecos Premium website",
     label_service: "Service", label_persons: "People", label_budget: "Budget",
@@ -1489,97 +1628,37 @@ const chatTranslations = {
   }
 };
 
-// Para los otros 7 idiomas, fallback a español
+// Para los otros 7 idiomas, traducir solo las claves esenciales del chat
+const chatTranslationsOther = {
+  nl: { welcome: "Hallo! 👋 Ik ben uw Marruecos Premium assistent. Welke taal?", title: "Marokko Assistent", status: "● Online", tooltip: "💬 Hulp nodig?", goal: "Wat wilt u vandaag doen?", goal_options: ["🏨 Accommodatie boeken", "🗺️ Tour boeken", "🚗 Transport", "🎁 Compleet pakket", "ℹ️ Informatie"], general_info_options: ["🏨 Accommodatie boeken", "🗺️ Tour boeken", "🚗 Transport boeken", "🎁 Pakket boeken", "👋 Nee bedankt"], thanks_goodbye: "Bedankt voor uw interesse! Tot ziens 👋", sent_from: "Verzonden vanaf Marruecos Premium website", add_more: "Toevoegen", continue: "Doorgaan", review: "📋 Controleer gegevens:", review_title: "SAMENVATTING", send_whatsapp: "✅ Versturen", edit_data: "✏️ Wijzigen", success: "Perfect! Doorsturen naar WhatsApp.", invalid_email: "⚠️ Ongeldige email.", invalid_phone: "⚠️ Nummer moet landcode bevatten.", invalid_name: "⚠️ Voer volledige naam in." },
+  de: { welcome: "Hallo! 👋 Ich bin Ihr Marruecos Premium Assistent. Welche Sprache?", title: "Marokko Assistent", status: "● Online", tooltip: "💬 Hilfe benötigt?", goal: "Was möchten Sie heute tun?", goal_options: ["🏨 Unterkunft buchen", "🗺️ Tour buchen", "🚗 Transport", "🎁 Komplettpaket", "ℹ️ Information"], general_info_options: ["🏨 Unterkunft buchen", "🗺️ Tour buchen", "🚗 Transport buchen", "🎁 Paket buchen", "👋 Nein danke"], thanks_goodbye: "Danke für Ihr Interesse! Bis bald 👋", sent_from: "Gesendet von der Marruecos Premium Website", add_more: "Hinzufügen", continue: "Weiter", review: "📋 Daten überprüfen:", review_title: "ZUSAMMENFASSUNG", send_whatsapp: "✅ Senden", edit_data: "✏️ Bearbeiten", success: "Perfekt! Weiterleitung zu WhatsApp.", invalid_email: "⚠️ Ungültige Email.", invalid_phone: "⚠️ Nummer muss Ländervorwahl enthalten.", invalid_name: "⚠️ Bitte vollständigen Namen eingeben." },
+  it: { welcome: "Ciao! 👋 Sono il tuo assistente Marruecos Premium. Quale lingua?", title: "Assistente Marocco", status: "● Online", tooltip: "💬 Hai bisogno di aiuto?", goal: "Cosa vorresti fare oggi?", goal_options: ["🏨 Prenotare alloggio", "🗺️ Prenotare tour", "🚗 Trasporto", "🎁 Pacchetto completo", "ℹ️ Informazioni"], general_info_options: ["🏨 Prenotare alloggio", "🗺️ Prenotare tour", "🚗 Prenotare trasporto", "🎁 Prenotare pacchetto", "👋 No grazie"], thanks_goodbye: "Grazie per il tuo interesse! A presto 👋", sent_from: "Inviato dal sito Marruecos Premium", add_more: "Aggiungi", continue: "Continua", review: "📋 Controlla dati:", review_title: "RIEPILOGO", send_whatsapp: "✅ Invia", edit_data: "✏️ Modifica", success: "Perfetto! Reindirizzamento a WhatsApp.", invalid_email: "⚠️ Email non valida.", invalid_phone: "⚠️ Il numero deve includere il prefisso.", invalid_name: "⚠️ Inserisci nome completo." },
+  pt: { welcome: "Olá! 👋 Sou seu assistente Marruecos Premium. Qual idioma?", title: "Assistente Marrocos", status: "● Online", tooltip: "💬 Precisa de ajuda?", goal: "O que gostaria de fazer hoje?", goal_options: ["🏨 Reservar hospedagem", "🗺️ Contratar tour", "🚗 Transporte", "🎁 Pacote completo", "ℹ️ Informações"], general_info_options: ["🏨 Reservar hospedagem", "🗺️ Contratar tour", "🚗 Contratar transporte", "🎁 Contratar pacote", "👋 Não, obrigado"], thanks_goodbye: "Obrigado pelo seu interesse! Até breve 👋", sent_from: "Enviado do site Marruecos Premium", add_more: "Adicionar", continue: "Continuar", review: "📋 Revise dados:", review_title: "RESUMO", send_whatsapp: "✅ Enviar", edit_data: "✏️ Modificar", success: "Perfeito! Redirecionando ao WhatsApp.", invalid_email: "⚠️ Email inválido.", invalid_phone: "⚠️ Número deve incluir código do país.", invalid_name: "⚠️ Insira nome completo." },
+  ar: { welcome: "مرحبا! 👋 أنا مساعدك. بأي لغة تفضل؟", title: "مساعد المغرب", status: "● متصل", tooltip: "💬 هل تحتاج مساعدة؟", goal: "ماذا تريد أن تفعل اليوم؟", goal_options: ["🏨 حجز إقامة", "🗺️ حجز جولة", "🚗 نقل", "🎁 باقة كاملة", "ℹ️ معلومات"], general_info_options: ["🏨 حجز إقامة", "🗺️ حجز جولة", "🚗 حجز نقل", "🎁 حجز باقة", "👋 لا شكراً"], thanks_goodbye: "شكراً لاهتمامك! نراك قريباً 👋", sent_from: "مرسل من موقع المغرب بريميوم", add_more: "إضافة", continue: "متابعة", review: "📋 راجع بياناتك:", review_title: "ملخص طلبك", send_whatsapp: "✅ إرسال", edit_data: "✏️ تعديل", success: "ممتاز! إعادة التوجيه إلى الواتساب.", invalid_email: "⚠️ بريد غير صالح.", invalid_phone: "⚠️ يجب أن يتضمن رمز الدولة.", invalid_name: "⚠️ أدخل اسمك الكامل." },
+  zh: { welcome: "你好! 👋 您喜欢哪种语言？", title: "摩洛哥助手", status: "● 在线", tooltip: "💬 需要帮助？", goal: "您今天想做什么？", goal_options: ["🏨 预订住宿", "🗺️ 预订旅游", "🚗 交通", "🎁 完整套餐", "ℹ️ 信息"], general_info_options: ["🏨 预订住宿", "🗺️ 预订旅游", "🚗 预订交通", "🎁 预订套餐", "👋 不，谢谢"], thanks_goodbye: "感谢您的兴趣！再见 👋", sent_from: "来自Marruecos Premium网站", add_more: "添加", continue: "继续", review: "📋 检查信息：", review_title: "您的请求摘要", send_whatsapp: "✅ 发送", edit_data: "✏️ 修改", success: "完美！重定向到WhatsApp。", invalid_email: "⚠️ 邮箱无效。", invalid_phone: "⚠️ 号码必须包含国家代码。", invalid_name: "⚠️ 请输入您的姓名（至少2个字符）。" },
+  ru: { welcome: "Здравствуйте! 👋 Какой язык?", title: "Ассистент Марокко", status: "● Онлайн", tooltip: "💬 Нужна помощь?", goal: "Что бы вы хотели сделать?", goal_options: ["🏨 Забронировать проживание", "🗺️ Забронировать тур", "🚗 Транспорт", "🎁 Полный пакет", "ℹ️ Информация"], general_info_options: ["🏨 Забронировать проживание", "🗺️ Забронировать тур", "🚗 Забронировать транспорт", "🎁 Забронировать пакет", "👋 Нет, спасибо"], thanks_goodbye: "Спасибо за ваш интерес! До скорого 👋", sent_from: "Отправлено с сайта Marruecos Premium", add_more: "Добавить", continue: "Продолжить", review: "📋 Проверьте данные:", review_title: "СВОДКА ЗАПРОСА", send_whatsapp: "✅ Отправить", edit_data: "✏️ Изменить", success: "Отлично! Перенаправление в WhatsApp.", invalid_email: "⚠️ Email недействителен.", invalid_phone: "⚠️ Номер должен включать код страны.", invalid_name: "⚠️ Введите имя (минимум 2 символа)." }
+};
+
+// Combinar traducciones base con las específicas de cada idioma
 ['nl', 'de', 'it', 'pt', 'ar', 'zh', 'ru'].forEach(lang => {
-  chatTranslations[lang] = { ...chatTranslations.es };
+  chatTranslations[lang] = { ...chatTranslationsBase, ...chatTranslationsOther[lang] };
 });
 
-// Reemplazo con traducciones específicas para AR (RTL)
-Object.assign(chatTranslations.ar, {
-  welcome: "مرحبا! 👋 أنا مساعدك. بأي لغة تفضل؟",
-  title: "مساعد المغرب", status: "● متصل", placeholder: "اكتب...",
-  tooltip: "💬 هل تحتاج مساعدة؟", goal: "ماذا تريد أن تفعل اليوم؟",
-  goal_options: ["🏨 حجز إقامة", "🗺️ حجز جولة", "🚗 نقل", "🎁 باقة كاملة", "ℹ️ معلومات"],
-  city: "في أي مدينة؟", dates: "التواريخ؟", persons: "كم شخص؟",
-  general_info: "بكل سرور! نقدم:\n\n🏨 إقامة\n🗺️ جولات\n🚗 نقل\n🎁 باقات\n\nماذا تريد أن تفعل؟",
-  general_info_options: ["🏨 حجز إقامة", "🗺️ حجز جولة", "🚗 حجز نقل", "🎁 حجز باقة", "👋 لا شكراً"],
-  thanks_goodbye: "شكراً لاهتمامك! نراك قريباً 👋",
-  sent_from: "مرسل من موقع المغرب بريميوم",
-  invalid_name: "⚠️ أدخل اسمك (حرفان على الأقل)"
-});
-
-// Reemplazo con traducciones específicas para ZH
-Object.assign(chatTranslations.zh, {
-  welcome: "你好! 👋 您喜欢哪种语言？", title: "摩洛哥助手", status: "● 在线",
-  placeholder: "输入...", tooltip: "💬 需要帮助？",
-  goal: "您今天想做什么？",
-  goal_options: ["🏨 预订住宿", "🗺️ 预订旅游", "🚗 交通", "🎁 完整套餐", "ℹ️ 信息"],
-  general_info: "很高兴！我们提供：\n\n🏨 住宿\n🗺️ 旅游\n🚗 交通\n🎁 套餐\n\n您想做什么？",
-  general_info_options: ["🏨 预订住宿", "🗺️ 预订旅游", "🚗 预订交通", "🎁 预订套餐", "👋 不，谢谢"],
-  thanks_goodbye: "感谢您的兴趣！再见 👋",
-  sent_from: "来自Marruecos Premium网站",
-  invalid_name: "⚠️ 请输入您的姓名（至少2个字符）"
-});
-
-// Reemplazo con traducciones específicas para RU
-Object.assign(chatTranslations.ru, {
-  welcome: "Здравствуйте! 👋 Какой язык?", title: "Ассистент Марокко", status: "● Онлайн",
-  placeholder: "Введите...", tooltip: "💬 Нужна помощь?",
-  goal: "Что бы вы хотели сделать?",
-  goal_options: ["🏨 Забронировать проживание", "🗺️ Забронировать тур", "🚗 Транспорт", "🎁 Полный пакет", "ℹ️ Информация"],
-  general_info: "С удовольствием! Предлагаем:\n\n🏨 Проживание\n🗺️ Туры\n🚗 Транспорт\n🎁 Пакеты\n\nЧто вы хотите сделать?",
-  general_info_options: ["🏨 Забронировать проживание", "🗺️ Забронировать тур", "🚗 Забронировать транспорт", "🎁 Забронировать пакет", "👋 Нет, спасибо"],
-  thanks_goodbye: "Спасибо за ваш интерес! До скорого 👋",
-  sent_from: "Отправлено с сайта Marruecos Premium",
-  invalid_name: "⚠️ Введите имя (минимум 2 символа)"
-});
-
-// Para los otros idiomas (nl, de, it, pt), usaré un approach más detallado
-Object.assign(chatTranslations.nl, {
-  welcome: "Hallo! 👋 Welke taal?", title: "Marokko Assistent",
-  goal: "Wat wilt u vandaag doen?",
-  goal_options: ["🏨 Accommodatie boeken", "🗺️ Tour boeken", "🚗 Transport", "🎁 Compleet pakket", "ℹ️ Informatie"],
-  general_info_options: ["🏨 Accommodatie boeken", "🗺️ Tour boeken", "🚗 Transport boeken", "🎁 Pakket boeken", "👋 Nee bedankt"],
-  thanks_goodbye: "Bedankt voor uw interesse! Tot ziens 👋",
-  sent_from: "Verzonden vanaf Marruecos Premium website"
-});
-
-Object.assign(chatTranslations.de, {
-  welcome: "Hallo! 👋 Welche Sprache?", title: "Marokko Assistent",
-  goal: "Was möchten Sie heute tun?",
-  goal_options: ["🏨 Unterkunft buchen", "🗺️ Tour buchen", "🚗 Transport", "🎁 Komplettpaket", "ℹ️ Information"],
-  general_info_options: ["🏨 Unterkunft buchen", "🗺️ Tour buchen", "🚗 Transport buchen", "🎁 Paket buchen", "👋 Nein danke"],
-  thanks_goodbye: "Danke für Ihr Interesse! Bis bald 👋",
-  sent_from: "Gesendet von der Marruecos Premium Website"
-});
-
-Object.assign(chatTranslations.it, {
-  welcome: "Ciao! 👋 Quale lingua?", title: "Assistente Marocco",
-  goal: "Cosa vorresti fare oggi?",
-  goal_options: ["🏨 Prenotare alloggio", "🗺️ Prenotare tour", "🚗 Trasporto", "🎁 Pacchetto completo", "ℹ️ Informazioni"],
-  general_info_options: ["🏨 Prenotare alloggio", "🗺️ Prenotare tour", "🚗 Prenotare trasporto", "🎁 Prenotare pacchetto", "👋 No grazie"],
-  thanks_goodbye: "Grazie per il tuo interesse! A presto 👋",
-  sent_from: "Inviato dal sito Marruecos Premium"
-});
-
-Object.assign(chatTranslations.pt, {
-  welcome: "Olá! 👋 Qual idioma?", title: "Assistente Marrocos",
-  goal: "O que gostaria de fazer hoje?",
-  goal_options: ["🏨 Reservar hospedagem", "🗺️ Contratar tour", "🚗 Transporte", "🎁 Pacote completo", "ℹ️ Informações"],
-  general_info_options: ["🏨 Reservar hospedagem", "🗺️ Contratar tour", "🚗 Contratar transporte", "🎁 Contratar pacote", "👋 Não, obrigado"],
-  thanks_goodbye: "Obrigado pelo seu interesse! Até breve 👋",
-  sent_from: "Enviado do site Marruecos Premium"
-});
-
+/* ========================================
+   ESTADO GLOBAL
+   ======================================== */
 let currentLang = localStorage.getItem('siteLang') || detectLanguage();
 let chatState = { step: 'welcome', service: null, data: {}, history: [] };
-let currentSubmitHandler = null; // ✅ FIX #10: Handler global para sendInput
-let lastModalOpened = null; // ✅ FIX #6: Recordar qué modal está abierto
+let currentSubmitHandler = null;
+let lastModalOpened = null;
 const WHATSAPP_NUMBER = '212690157092';
 
 function t(key) { return chatTranslations[currentLang]?.[key] || chatTranslations.es[key] || key; }
 function tw(key) { return webTranslations[currentLang]?.[key] || webTranslations.es[key] || key; }
 
+/* ========================================
+   DROPDOWN IDIOMAS
+   ======================================== */
 function initLangDropdown() {
   const dropdown = document.getElementById('langDropdownContent');
   dropdown.innerHTML = '';
@@ -1610,6 +1689,9 @@ document.addEventListener('click', (e) => {
   if (!dropdown.contains(e.target)) dropdown.classList.remove('active');
 });
 
+/* ========================================
+   TRADUCCIÓN WEB
+   ======================================== */
 function translateWeb() {
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
@@ -1637,13 +1719,13 @@ function translateWeb() {
 function changeLanguage(langCode) {
   if (langCode === currentLang) return;
   currentLang = langCode;
-  localStorage.setItem('siteLang', langCode); // ✅ FIX #11: Unificada
+  localStorage.setItem('siteLang', langCode);
   
   translateWeb();
   renderLangSelector();
   applyChatLanguage();
   
-  // ✅ FIX #6: Re-renderizar modal si está abierto
+  // Re-renderizar modal si está abierto
   if (document.getElementById('serviceModal').classList.contains('active') && lastModalOpened?.type === 'service') {
     openServiceModal(lastModalOpened.id);
   }
@@ -1651,28 +1733,28 @@ function changeLanguage(langCode) {
     openDestModal(lastModalOpened.id);
   }
   
-  // ✅ FIX #9: Guardar datos antes de reset
+  // Preservar datos del chat
   const savedData = { ...chatState.data };
   const savedService = chatState.service;
-  const savedStep = chatState.step;
   
-  // ✅ FIX #1: Reiniciar chat y volver al inicio
   chatState = { step: 'welcome', service: savedService, data: savedData, history: [] };
   document.getElementById('chatMessages').innerHTML = '';
   document.getElementById('chatInputArea').style.display = 'none';
   updateProgress(0);
   
-  // Si el chat estaba activo, reiniciar la conversación
   if (document.getElementById('chatContainer').classList.contains('active')) {
     startChat();
   }
   
   document.getElementById('langDropdown').classList.remove('active');
-  document.getElementById('chatTooltip').textContent = t('tooltip'); // ✅ FIX #13
+  document.getElementById('chatTooltip').textContent = t('tooltip');
 }
 
+/* ========================================
+   MODALES - SERVICIOS
+   ======================================== */
 function openServiceModal(type) {
-  lastModalOpened = { type: 'service', id: type }; // ✅ FIX #6
+  lastModalOpened = { type: 'service', id: type };
   const contents = {
     accommodation: {
       icon: '🏨', title: tw('service_accom_title'),
@@ -1743,9 +1825,11 @@ function openServiceModal(type) {
   document.body.style.overflow = 'hidden';
 }
 
+/* ========================================
+   MODALES - DESTINOS
+   ======================================== */
 function openDestModal(destId) {
-  lastModalOpened = { type: 'dest', id: destId }; // ✅ FIX #6
-  // ✅ FIX #5: Icono de Fez corregido
+  lastModalOpened = { type: 'dest', id: destId };
   const icons = { marrakech:'🏛️', fez:'🕌', tangier:'🌊', chefchaouen:'💙', agadir:'🏖️', merzouga:'🐪', atlas:'⛰️', essaouira:'🎨' };
   const title = tw(`dest_${destId}_title`) || tw(`dest_${destId}`) || 'Destino';
   const intro = tw(`dest_${destId}_intro`) || tw(`dest_${destId}_desc`) || '';
@@ -1798,9 +1882,12 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') { closeModal('serviceModal'); closeModal('destModal'); }
 });
 
+/* ========================================
+   CHATBOT - INICIO
+   ======================================== */
 function initChat() {
   renderLangSelector();
-  initLangDropdown(); // ✅ FIX #8: Una sola inicialización
+  initLangDropdown();
   translateWeb();
   applyChatLanguage();
   setTimeout(() => document.getElementById('chatTooltip').classList.remove('hidden'), 3000);
@@ -1857,16 +1944,16 @@ function resetChat(silent = false) {
   if (!silent) startChat();
 }
 
+/* ========================================
+   CHATBOT - FLUJO COMPLETO
+   ======================================== */
 function startChat() {
   addBotMessage(t('welcome'));
   chatState.step = 'lang_selected';
   setTimeout(() => {
     showOptions(languages.map(l => ({ label: l.flag + ' ' + l.name, value: l.code })), (val) => {
-      if (val !== currentLang) {
-        changeLanguage(val);
-      } else {
-        askGoal();
-      }
+      if (val !== currentLang) changeLanguage(val);
+      else askGoal();
     });
   }, 500);
 }
@@ -1878,22 +1965,16 @@ function askGoal() {
   showOptions(t('goal_options').map((opt, i) => ({ label: opt, value: i })), (val) => {
     const goals = ['accommodation', 'tour', 'transport', 'package', 'general'];
     chatState.service = goals[val];
-    if (chatState.service === 'general') {
-      // ✅ FIX #2: Flujo correcto para info general
-      askGeneralInfo();
-    } else {
-      askServiceQuestions();
-    }
+    if (chatState.service === 'general') askGeneralInfo();
+    else askServiceQuestions();
   });
 }
 
-// ✅ FIX #2: Nueva función para info general
 function askGeneralInfo() {
   addBotMessage(t('general_info'));
   setTimeout(() => {
     addBotMessage(t('general_info_followup'));
     showOptions(t('general_info_options').map((opt, i) => ({ label: opt, value: i })), (val) => {
-      // 0: Reservar alojamiento, 1: Reservar tour, 2: Reservar transporte, 3: Reservar paquete, 4: No gracias
       if (val === 4) {
         addBotMessage(t('thanks_goodbye'));
         chatState.step = 'finished';
@@ -1961,7 +2042,6 @@ function askBoard() {
   });
 }
 
-// ✅ FIX #4: Evitar duplicados en amenities
 function askAmenities() {
   updateProgress(55);
   addBotMessage(t('amenities'));
@@ -1969,16 +2049,13 @@ function askAmenities() {
   const availableOptions = t('amenities_options').filter(opt => !alreadySelected.includes(opt));
   
   if (availableOptions.length === 0) {
-    // Si ya seleccionó todos, continuar
     askBudgetAccom();
     return;
   }
   
   showOptions(availableOptions.map(opt => ({ label: opt, value: opt })), (val) => {
     chatState.data.amenities = chatState.data.amenities || [];
-    if (!chatState.data.amenities.includes(val)) {
-      chatState.data.amenities.push(val);
-    }
+    if (!chatState.data.amenities.includes(val)) chatState.data.amenities.push(val);
     showOptions([
       { label: '➕ ' + t('add_more'), value: 'more' },
       { label: '✅ ' + t('continue'), value: 'continue' }
@@ -2115,7 +2192,6 @@ function askPackagePersons() {
   });
 }
 
-// ✅ FIX #4: Evitar duplicados en includes
 function askPackageInclude() {
   updateProgress(60);
   addBotMessage(t('package_include'));
@@ -2129,9 +2205,7 @@ function askPackageInclude() {
   
   showOptions(availableOptions.map(opt => ({ label: opt, value: opt })), (val) => {
     chatState.data.includes = chatState.data.includes || [];
-    if (!chatState.data.includes.includes(val)) {
-      chatState.data.includes.push(val);
-    }
+    if (!chatState.data.includes.includes(val)) chatState.data.includes.push(val);
     showOptions([
       { label: '➕ ' + t('add_more'), value: 'more' },
       { label: '✅ ' + t('continue'), value: 'continue' }
@@ -2169,7 +2243,6 @@ function askTravelTime() {
   });
 }
 
-// ✅ FIX #7: Validación de nombre relajada
 function askFullName() {
   updateProgress(90);
   addBotMessage(t('full_name'));
@@ -2291,7 +2364,6 @@ function getServiceFields() {
   }
 }
 
-// ✅ FIX #3: Mensaje de WhatsApp traducido
 function sendToWhatsApp() {
   const d = chatState.data;
   const serviceNames = {
@@ -2315,7 +2387,7 @@ function sendToWhatsApp() {
   message += `\n*${t('label_fullName')}:* ${d.fullName}\n`;
   message += `*Email:* ${d.email}\n`;
   message += `*WhatsApp:* ${d.whatsapp}\n`;
-  message += `\n_${t('sent_from')}_`; // ✅ FIX #3: Traducido
+  message += `\n_${t('sent_from')}_`;
   
   const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
   localStorage.setItem('lastBooking', JSON.stringify({ ...d, service: chatState.service, timestamp: Date.now() }));
@@ -2324,6 +2396,9 @@ function sendToWhatsApp() {
   setTimeout(() => window.open(url, '_blank'), 1500);
 }
 
+/* ========================================
+   UI CHATBOT
+   ======================================== */
 function addBotMessage(text, isHTML = false) {
   const messages = document.getElementById('chatMessages');
   const msg = document.createElement('div');
@@ -2380,7 +2455,6 @@ function showOptions(options, callback) {
   }, 600);
 }
 
-// ✅ FIX #10: sendInput arreglado con handler global
 function showInput(callback) {
   const inputArea = document.getElementById('chatInputArea');
   const input = document.getElementById('chatInput');
@@ -2389,7 +2463,6 @@ function showInput(callback) {
   input.focus();
   input.classList.remove('error');
   
-  // Guardar el handler globalmente para que sendInput pueda usarlo
   currentSubmitHandler = () => {
     const val = input.value.trim();
     if (!val) { input.classList.add('error'); return; }
@@ -2400,7 +2473,6 @@ function showInput(callback) {
     callback(val);
   };
   
-  // Remover listener anterior
   const newInput = input.cloneNode(true);
   input.parentNode.replaceChild(newInput, input);
   
@@ -2418,17 +2490,17 @@ function showInput(callback) {
   }
 }
 
-// ✅ FIX #10: sendInput ahora usa el handler global
 function sendInput() {
-  if (currentSubmitHandler) {
-    currentSubmitHandler();
-  }
+  if (currentSubmitHandler) currentSubmitHandler();
 }
 
 function updateProgress(percent) {
   document.getElementById('progressBar').style.width = percent + '%';
 }
 
+/* ========================================
+   MENÚ Y SCROLL
+   ======================================== */
 function toggleMenu() {
   document.getElementById('navMenu').classList.toggle('active');
 }
